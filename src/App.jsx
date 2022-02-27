@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./routes/LandingPage";
-import SignInPage from "./routes/SignInPage";
-import SignUpPage from "./routes/SignUpPage";
+import LandingPage from "./routes/landing-page/LandingPage";
+import SignInPage from "./routes/sign-in-page/SignInPage";
+import SignUpPage from "./routes/sign-up-page/SignUpPage";
 
 const App = () => {
   return (
-    <div className="container">
+    <div>
       <Router>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
