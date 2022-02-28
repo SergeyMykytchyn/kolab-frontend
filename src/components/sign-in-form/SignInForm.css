@@ -1,8 +1,8 @@
-.sign-up-form {
+.sign-in-form {
   padding: 60px;
 }
 
-.sign-up-card {
+.card {
   margin: 0 auto;
   width: 500px;
 
@@ -13,24 +13,16 @@
   padding: 20px 16px 22px 16px;
 }
 
-.sign-up-cardTitle {
+.cardTitle {
   text-align: center;
   margin-bottom: 16px;
 }
 
-.sign-up-cardTitleText {
+.cardTitleText {
   font-weight: bold;
   font-size: 22px;
   line-height: 24px;
   letter-spacing: 0.5px;
-}
-
-.Mui-error {
-  color: #f44336 !important;
-}
-
-.Mui-error:after {
-  border-bottom-color: #f44336 !important;
 }
 
 .submitButton {

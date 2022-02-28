@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import "./SignUpForm.css";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
+import Api from "../../api/Api";
 
 const SignUpForm = () => {
+  const history = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [firstNameClicked, setFirstNameClicked] = useState(false);
   
@@ -15,13 +19,31 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [passwordClicked, setPasswordClicked] = useState(false);
 
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordClicked, setConfirmPasswordClicked] = useState(false);
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordConfirmClicked, setPasswordConfirmClicked] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Api.post("/User/sign-up", {
+        email,
+        firstName,
+        lastName,
+        password,
+        passwordConfirm,
+        role: "student"
+      });
+      console.log(response);
+      history("/sign-in");
+    } catch(err) {
+      console.error(err.message);
+    }
+  };
 
   return (
     <form className="sign-up-form">
       <div className="sign-up-card">
-        <div className="sign-up-cardTitle"><span class="sign-up-cardTitleText">Sign up</span></div>
+        <div className="sign-up-cardTitle"><span className="sign-up-cardTitleText">Sign up</span></div>
         <div>
 
           <TextField
@@ -106,24 +128,29 @@ const SignUpForm = () => {
             sx={{
               marginBottom: "8px",
               ".MuiFormHelperText-root": {
-                visibility: !confirmPasswordClicked || confirmPassword ? "hidden" : "visible"
+                visibility: !passwordConfirmClicked || passwordConfirm ? "hidden" : "visible"
               }
             }}
             required
-            error={!confirmPasswordClicked || confirmPassword ? false: true}
+            error={!passwordConfirmClicked || passwordConfirm ? false: true}
             id="filled-error-helper-text-required"
-            label="Confrim password"
+            label="Confirm password"
             variant="filled"
-            helperText="Confrim password is required"
+            helperText="Confirm password is required"
             fullWidth
             type="password"
             autoComplete="new-password"
-            value={confirmPassword}
-            onChange={e => setConfirmPassword(e.target.value)}
-            onBlur={() => setConfirmPasswordClicked(true)}
+            value={passwordConfirm}
+            onChange={e => setPasswordConfirm(e.target.value)}
+            onBlur={() => setPasswordConfirmClicked(true)}
           />
 
         </div>
+        
+        <button className="submitButton" onClick={handleSubmit}>
+          <span className="submitButtonText">Sign up</span>
+        </button>
+
       </div>
     </form>
   );
