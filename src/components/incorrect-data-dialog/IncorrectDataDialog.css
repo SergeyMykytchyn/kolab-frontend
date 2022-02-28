@@ -1,0 +1,67 @@
+.overlay-container {
+  position: fixed;
+  z-index: 1000;
+
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.global-overlay-wrapper {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  position: absolute;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-pane {
+  background: #fff;
+  width: 246px;
+  height: 163px;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.overlay-pane-title {
+  font-size: x-large;
+  font-weight: bold;
+
+  margin-bottom: 18px;
+}
+
+.overlay-pane-message {
+  margin-bottom: 18px;
+}
+
+.overlay-pane-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.overlay-pane-button {
+  background-color: #76b1a6;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  width: 100px;
+  height: 40px;
+  font-size: large;
+  color: #ffff;
+}
