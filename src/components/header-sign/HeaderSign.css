@@ -1,0 +1,72 @@
+.sign-header {
+  height: 70px;
+  width: 100%;
+
+  background-color: #ffff;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25),
+    0px 2px 6px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 1px;
+
+  padding-left: 60px;
+  padding-right: 60px;
+
+  display: flex;
+  align-items: center;
+}
+
+.sign-headerContent {
+  height: 32px;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.sign-headerButtons {
+  height: 32px;
+  width: 190px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sign-headerButtonsSignIn {
+  color: #5f5a6e;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+}
+
+.sign-headerButtonsSignUp {
+  height: 32px;
+  width: 134px;
+
+  background-color: #76b1a6;
+  border: 0.7px solid #76b1a6;
+  border-radius: 5px;
+
+  padding: 7px 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-headerButtonsSignUpText {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sign-logo {
+  height: 32px;
+  width: 103px;
+}

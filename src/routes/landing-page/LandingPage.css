@@ -1,4 +1,4 @@
-.container {
+.landing-container {
   height: 778px;
   width: 1000px;
 
@@ -16,7 +16,7 @@
   padding: 20px;
 }
 
-.header {
+.landing-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,12 +28,12 @@
   margin-bottom: 20px;
 }
 
-.logo {
+.landing-logo {
   height: 32px;
   width: 103px;
 }
 
-.headerButtons {
+.landing-headerButtons {
   height: 32px;
   width: 190px;
 
@@ -42,14 +42,14 @@
   align-items: baseline;
 }
 
-.headerButtonsSignIn {
+.landing-headerButtonsSignIn {
   color: #5f5a6e;
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0.02em;
 }
 
-.headerButtonsSignUp {
+.landing-headerButtonsSignUp {
   height: 32px;
   width: 134px;
 
@@ -64,7 +64,7 @@
   align-items: center;
 }
 
-.headerButtonsSignUpText {
+.landing-headerButtonsSignUpText {
   color: #ffffff;
   font-weight: 500;
   font-size: 12px;
@@ -77,19 +77,19 @@ a {
   color: inherit;
 }
 
-.hr {
+.landing-hr {
   height: 1px;
   width: 100%;
 
   background-color: #fbebe7;
 }
 
-.arrow {
+.landing-arrow {
   width: 20px;
   height: 20px;
 }
 
-.ellipse {
+.landing-ellipse {
   position: absolute;
   width: 84px;
   height: 84px;
@@ -97,30 +97,30 @@ a {
   top: 44px;
 }
 
-.plane {
+.landing-plane {
   position: absolute;
   right: -50px;
   top: 40px;
 }
 
-.line {
+.landing-line {
   position: absolute;
   top: 400px;
   left: 330px;
 }
 
-.stars {
+.landing-stars {
   position: absolute;
   top: 330px;
   left: 300px;
 }
 
-.content {
+.landing-content {
   display: flex;
   position: relative;
 }
 
-.contentLeft {
+.landing-contentLeft {
   width: 430px;
 
   display: flex;
@@ -134,7 +134,7 @@ a {
   position: relative;
 }
 
-.contentLeftTop {
+.landing-contentLeftTop {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -145,21 +145,21 @@ a {
   z-index: 1;
 }
 
-.contentLeftTopTitle {
+.landing-contentLeftTopTitle {
   font-weight: bold;
   font-size: 47px;
   letter-spacing: 0.02em;
   color: #33295d;
 }
 
-.contentLeftTopText {
+.landing-contentLeftTopText {
   font-size: 17px;
   letter-spacing: 0.02em;
   color: #5f5a6e;
   width: 400px;
 }
 
-.contentLeftTopButton {
+.landing-contentLeftTopButton {
   width: 150px;
   height: 48px;
   background-color: #76b1a6;
@@ -172,7 +172,7 @@ a {
   justify-content: center;
 }
 
-.contentLeftTopButtonText {
+.landing-contentLeftTopButtonText {
   color: #ffff;
   font-weight: 500;
   font-size: 14px;
@@ -181,7 +181,7 @@ a {
   margin-right: 4px;
 }
 
-.contentLeftCenterText {
+.landing-contentLeftCenterText {
   font-size: 12px;
   letter-spacing: 0.02em;
   color: #756b6d;
@@ -189,11 +189,11 @@ a {
   margin-top: 14px;
 }
 
-.contentLeftBottom {
+.landing-contentLeftBottom {
   margin-top: 45px;
 }
 
-.contentRight {
+.landing-contentRight {
   width: 430px;
 
   display: flex;
@@ -204,7 +204,7 @@ a {
   z-index: 1;
 }
 
-.contentRightBottom {
+.landing-contentRightBottom {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -212,7 +212,7 @@ a {
   margin-top: 34px;
 }
 
-.contentRightBottomTitle {
+.landing-contentRightBottomTitle {
   font-weight: bold;
   font-size: 34px;
   letter-spacing: 0.02em;
@@ -221,7 +221,7 @@ a {
   margin-bottom: 14px;
 }
 
-.contentRightBottomText {
+.landing-contentRightBottomText {
   font-size: 16px;
   letter-spacing: 0.02em;
   color: #5f5a6e;
