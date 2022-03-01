@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./routes/landing-page/LandingPage";
-import SignInPage from "./routes/sign-in-page/SignInPage";
-import SignUpPage from "./routes/sign-up-page/SignUpPage";
-import GroupsPage from "./routes/groups-page/GroupsPage";
+import LandingPage from "./containers/landing-page/LandingPage";
+import SignInPage from "./containers/sign-in-page/SignInPage";
+import SignUpPage from "./containers/sign-up-page/SignUpPage";
+import GroupsPage from "./containers/groups-page/GroupsPage";
 
 const App = () => {
   return (

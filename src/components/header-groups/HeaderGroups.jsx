@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HeaderGroups.css";
 import { Logout, Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-const HeaderGroups = () => {
+const HeaderGroups = ({ user }) => {
   const history = useNavigate();
+
+  const [toggleAdd, setToggleAdd] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("TOKEN");
     history("/");
+  };
+
+  const toggleAddClick = () => {
+    setToggleAdd(!toggleAdd);
   };
 
   return (
@@ -21,7 +27,11 @@ const HeaderGroups = () => {
         </div>
 
         <div className="headerContentEnd">
-          <Add className="add" />
+          <Add className="add" onClick={() => toggleAddClick()} />
+          {toggleAdd ? <div className="toggleAdd">
+            { user.data.role === "teacher" ? <button className="toggleAddButton">Create a project</button> : null }
+            <button className="toggleAddButton">Join the project</button>
+          </div> : null }
           <div className="avatar">
             <a href="/">
               <div className="avatarCircle">
