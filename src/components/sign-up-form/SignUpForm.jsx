@@ -33,7 +33,6 @@ const SignUpForm = () => {
         passwordConfirm,
         role: "student"
       });
-      console.log(response);
       history("/sign-in");
     } catch(err) {
       console.error(err.message);

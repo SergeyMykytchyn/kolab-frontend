@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import HeaderGroups from "../../components/header-groups/HeaderGroups";
 import GroupsGrid from "../../components/groups-grid/GroupsGrid";
 import Api from "../../api/Api";
+import { getConfig } from "../../constants";
+import { GroupsContext } from "../../context/GroupsContext"
 
 const GroupsPage = () => {
-  const [groups, setGroups] = useState([]);
-  const [user, setUser] = useState({});
+  const { setGroups, setUser } = useContext(GroupsContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getConfig = {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
-            "Accept": "application/json"
-          }
-        };
         const user = await Api.get("/User/user-info", getConfig);
         setUser(user);
         const response = await Api.get(`/Group/?userId=${user.data.id}`, getConfig);
@@ -29,10 +24,10 @@ const GroupsPage = () => {
   }, []);
 
   return (
-    <div>
-      <HeaderGroups user={user} />
-      <GroupsGrid groups={groups} />
-    </div>
+    <>
+      <HeaderGroups />
+      <GroupsGrid />
+    </>
   );
 };
 

@@ -2,7 +2,6 @@ import React from "react";
 import "./IncorrectDataDialog.css";
 
 const IncorrectDataDialog = ({ handleOk, title, message }) => {
-  console.log("IncorrectDataDialog");
   return (
     <div className="overlay-container">
       <div className="overlay-backdrop"></div>

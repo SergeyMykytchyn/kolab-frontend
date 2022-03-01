@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./GroupsGrid.css";
 import GroupCard from "../group-card/GroupCard";
+import { GroupsContext } from "../../context/GroupsContext"
+import { GroupAdd } from "@mui/icons-material";
 
-const GroupsGrid = ({ groups }) => {
+const GroupsGrid = () => {
+  const { groups } = useContext(GroupsContext);
+  
   const gridContainerWidth = window.innerWidth - 17 - 46;
   const cardWidth = 337;
   let rows = [];
@@ -10,10 +14,6 @@ const GroupsGrid = ({ groups }) => {
   for (let i = 0, j = 0; i < groups.length; i++) {
     j++;
     if (cardWidth * j > gridContainerWidth) {
-      // i === 8 ? console.log()
-      console.log(i);
-      console.log(j);
-      console.log(cards);
       rows.push(cards);
       cards = [];
       j = 1;
@@ -23,15 +23,14 @@ const GroupsGrid = ({ groups }) => {
       rows.push(cards);
     }
   }
-  console.log(rows);
+
   return (
     <div className="groups-grid-container">
-      {/* go containers to second line if they do not fit */}
-      {rows.map((row) => {
+      {rows.map((row, index) => {
         return (
-          <div className="groups-row">
+          <div key={`row-${index}`} className="groups-row">
             {row.map((group) => {
-              return <GroupCard group={group} />
+              return <GroupCard key={group.id} group={group} />
             })}
           </div>
         )}

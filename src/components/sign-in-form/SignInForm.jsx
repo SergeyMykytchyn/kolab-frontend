@@ -36,8 +36,7 @@ const SignInForm = () => {
       history("/groups");
     }
   }, []);
-
-  console.log(isIncorrectData);
+  
   return (
     <>
       {isIncorrectData ? <IncorrectDataDialog handleOk={() => setIsIncorrectData(!isIncorrectData)} title="Error" message="Incorrect password or email" /> : null }

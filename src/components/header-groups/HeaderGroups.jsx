@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./HeaderGroups.css";
 import { Logout, Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { GroupsContext } from "../../context/GroupsContext"
 
-const HeaderGroups = ({ user }) => {
+const HeaderGroups = () => {
+  const { addGroup, user } = useContext(GroupsContext);
   const history = useNavigate();
 
   const [toggleAdd, setToggleAdd] = useState(false);
@@ -15,6 +17,20 @@ const HeaderGroups = ({ user }) => {
 
   const toggleAddClick = () => {
     setToggleAdd(!toggleAdd);
+  };
+
+  const handleCreate = () => {
+    const newGroup = {
+      id: -1,
+      name: "Name",
+      description: "Description",
+      creator: {
+        firstName: user.data.firstName,
+        lastName: user.data.lastName
+      },
+      isCreating: true
+    };
+    addGroup(newGroup);
   };
 
   return (
@@ -29,7 +45,7 @@ const HeaderGroups = ({ user }) => {
         <div className="headerContentEnd">
           <Add className="add" onClick={() => toggleAddClick()} />
           {toggleAdd ? <div className="toggleAdd">
-            { user.data.role === "teacher" ? <button className="toggleAddButton">Create a project</button> : null }
+            { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={() => handleCreate()}>Create a project</button> : null }
             <button className="toggleAddButton">Join the project</button>
           </div> : null }
           <div className="avatar">
