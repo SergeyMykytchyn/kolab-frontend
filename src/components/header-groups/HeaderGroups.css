@@ -85,6 +85,7 @@
 }
 
 .toggleAdd {
+  z-index: 1000;
   position: absolute;
   top: 42px;
   right: 94px;
