@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react";
 import "./GroupCard.css";
 import { MoreVert } from "@mui/icons-material";
 import Api from "../../api/Api";
-import { getConfig } from "../../constants";
 import { GroupsContext } from "../../context/GroupsContext"
+// import { getConfig } from "../../constants";
 
 const GroupCard = ({ group }) => {
-  const { removeGroup, addGroup, createGroup, user } = useContext(GroupsContext);
+  const { removeGroup, createGroup, user } = useContext(GroupsContext);
   const [toggleMoreVert, setToggleMoreVert] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(group.name);
@@ -19,7 +19,13 @@ const GroupCard = ({ group }) => {
         name,
         description,
       };
-      const response = Api.put("/Group", payload, getConfig);
+      const getConfig = {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
+          "Accept": "application/json"
+        }
+      };
+      const response = await Api.put("/Group", payload, getConfig);
       setIsEditing(false);
     } catch(err) {
       console.error(err.message);
@@ -31,6 +37,12 @@ const GroupCard = ({ group }) => {
       const payload = {
         name,
         description,
+      };
+      const getConfig = {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
+          "Accept": "application/json"
+        }
       };
       const response = await Api.post("/Group", payload, getConfig);
       const newGroup = {
@@ -48,6 +60,12 @@ const GroupCard = ({ group }) => {
 
   const handleLeave = async () => {
     try {
+      const getConfig = {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
+          "Accept": "application/json"
+        }
+      };
       const response = await Api.post(`/User/leave-group?groupId=${group.id}`, {}, getConfig);
       removeGroup(group);
     } catch(err) {
@@ -57,6 +75,12 @@ const GroupCard = ({ group }) => {
 
   const handleDelete = async () => {
     try {
+      const getConfig = {
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
+          "Accept": "application/json"
+        }
+      };
       const response = await Api.delete(`/Group/${group.id}`, getConfig);
       removeGroup(group);
     } catch(err) {
@@ -86,7 +110,10 @@ const GroupCard = ({ group }) => {
       >
         <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} />
         {toggleMoreVert ? <div className="toggleMoreVert">
-          <button className="toggleMoreVertButton" onClick={() => setIsEditing(true)}>Edit</button>
+          <button className="toggleMoreVertButton" onClick={() => { 
+            setIsEditing(!isEditing);
+            setToggleMoreVert(!toggleMoreVert);
+          }}>Edit</button>
           <button className="toggleMoreVertButton" onClick={() => handleLeave()}>Leave</button>
           <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button>
           <button className="toggleMoreVertButton" onClick={() => handleCopyId()}>Copy id</button>

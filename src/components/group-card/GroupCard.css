@@ -5,7 +5,7 @@
   margin-left: 37px;
   margin-top: 37px;
 
-  display: flex;
+  display: inline-block;
   flex-direction: column;
 
   border-radius: 8px;

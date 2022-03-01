@@ -3,7 +3,7 @@ import "./SignInForm.css";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import Api from "../../api/Api";
-import IncorrectDataDialog from "../incorrect-data-dialog/IncorrectDataDialog";
+import Dialog from "../dialog/Dialog";
 
 const SignInForm = () => {
   const history = useNavigate();
@@ -39,7 +39,17 @@ const SignInForm = () => {
   
   return (
     <>
-      {isIncorrectData ? <IncorrectDataDialog handleOk={() => setIsIncorrectData(!isIncorrectData)} title="Error" message="Incorrect password or email" /> : null }
+      {isIncorrectData ? <Dialog handleOk={() => setIsIncorrectData(!isIncorrectData)}>
+        <div className="overlay-pane-title">
+          <span>Error</span>
+        </div>
+        <div className="overlay-pane-message">
+          <span>Email or password is wrong</span>
+        </div>
+        <div className="overlay-pane-button-wrapper">
+          <button onClick={() => setIsIncorrectData(!isIncorrectData)} className="overlay-pane-button">Ok</button>
+        </div>
+      </Dialog> : null }
       <form className="sign-in-form">
         <div className="card">
           <div className="cardTitle"><span className="cardTitleText">Sign in</span></div>

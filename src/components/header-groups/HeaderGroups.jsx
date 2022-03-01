@@ -30,6 +30,7 @@ const HeaderGroups = () => {
       },
       isCreating: true
     };
+    setToggleAdd(false);
     addGroup(newGroup);
   };
 
