@@ -110,12 +110,15 @@ const GroupCard = ({ group }) => {
       >
         <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} />
         {toggleMoreVert ? <div className="toggleMoreVert">
-          <button className="toggleMoreVertButton" onClick={() => { 
-            setIsEditing(!isEditing);
-            setToggleMoreVert(!toggleMoreVert);
-          }}>Edit</button>
+          {user.data.role === "teacher" ? 
+            <button className="toggleMoreVertButton" onClick={() => { 
+              setIsEditing(!isEditing);
+              setToggleMoreVert(!toggleMoreVert);
+            }}>
+              Edit
+            </button> : null}
           <button className="toggleMoreVertButton" onClick={() => handleLeave()}>Leave</button>
-          <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button>
+          {user.data.role === "teacher" ? <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button> : null}
           <button className="toggleMoreVertButton" onClick={() => handleCopyId()}>Copy id</button>
         </div> : null }
       </div>
