@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./SignUpForm.css";
 import TextField from "@mui/material/TextField";
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 import { useNavigate } from "react-router-dom";
 import Api from "../../api/Api";
 
@@ -22,6 +27,14 @@ const SignUpForm = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [passwordConfirmClicked, setPasswordConfirmClicked] = useState(false);
 
+  const [role, setRole] = useState("");
+  const [roleClicked, setRoleClicked] = useState(false);
+
+  const roles = [
+    { label: "Employee", value: "student" },
+    { label: "Manager", value: "teacher" }
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -31,13 +44,15 @@ const SignUpForm = () => {
         lastName,
         password,
         passwordConfirm,
-        role: "student"
+        role
       });
       history("/sign-in");
     } catch(err) {
       console.error(err.message);
     }
   };
+
+  console.log(role);
 
   return (
     <form className="sign-up-form">
@@ -54,7 +69,6 @@ const SignUpForm = () => {
             }}
             required
             error={!firstNameClicked || firstName ? false: true}
-            id="filled-error-helper-text-required"
             label="First name"
             variant="filled"
             helperText="First name is required"
@@ -73,7 +87,6 @@ const SignUpForm = () => {
             }}
             required
             error={!lastNameClicked || lastName ? false: true}
-            id="filled-error-helper-text-required"
             label="Last name"
             variant="filled"
             helperText="Last name is required"
@@ -92,7 +105,6 @@ const SignUpForm = () => {
             }}
             required
             error={!emailClicked || email ? false: true}
-            id="filled-error-helper-text-required"
             label="Email"
             variant="filled"
             helperText="Email is required"
@@ -111,7 +123,6 @@ const SignUpForm = () => {
             }}
             required
             error={!passwordClicked || password ? false: true}
-            id="filled-error-helper-text-required"
             label="Password"
             variant="filled"
             helperText="Password is required"
@@ -132,7 +143,6 @@ const SignUpForm = () => {
             }}
             required
             error={!passwordConfirmClicked || passwordConfirm ? false: true}
-            id="filled-error-helper-text-required"
             label="Confirm password"
             variant="filled"
             helperText="Confirm password is required"
@@ -143,6 +153,30 @@ const SignUpForm = () => {
             onChange={e => setPasswordConfirm(e.target.value)}
             onBlur={() => setPasswordConfirmClicked(true)}
           />
+
+          <FormControl
+            sx={{
+              marginBottom: "8px",
+              ".MuiFormHelperText-root": {
+                visibility: !roleClicked || role ? "hidden" : "visible"
+              }
+            }}
+            required
+            error={!roleClicked || role ? false: true}
+            onBlur={() => setRoleClicked(true)}
+            variant="filled"
+            fullWidth
+          > 
+            <InputLabel>Role</InputLabel>
+            <Select
+              value={role}
+              onChange={e => setRole(e.target.value)}
+            >
+              <MenuItem value="student">Employee</MenuItem>
+              <MenuItem value="teacher">Manager</MenuItem>
+            </Select>
+            <FormHelperText>Role is required</FormHelperText>
+          </FormControl>
 
         </div>
         
