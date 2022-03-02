@@ -69,7 +69,7 @@ const HeaderGroups = () => {
   return (
     <>
       {toggleJoin ? 
-        <Dialog>
+        <Dialog handleClose={() => setToggleJoin(false)}>
           <div className="dialog-join-title">
             <span>Join the project</span>
           </div>

@@ -39,7 +39,7 @@ const SignInForm = () => {
   
   return (
     <>
-      {isIncorrectData ? <Dialog handleOk={() => setIsIncorrectData(!isIncorrectData)}>
+      {isIncorrectData ? <Dialog handleClose={() => setIsIncorrectData(false)}>
         <div className="overlay-pane-title">
           <span>Error</span>
         </div>
@@ -47,7 +47,7 @@ const SignInForm = () => {
           <span>Email or password is wrong</span>
         </div>
         <div className="overlay-pane-button-wrapper">
-          <button onClick={() => setIsIncorrectData(!isIncorrectData)} className="overlay-pane-button">Ok</button>
+          <button onClick={() => setIsIncorrectData(false)} className="overlay-pane-button">Ok</button>
         </div>
       </Dialog> : null }
       <form className="sign-in-form">
