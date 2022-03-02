@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import "./HeaderGroups.css";
 import { Logout, Add } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
@@ -7,6 +6,27 @@ import { useNavigate } from "react-router-dom";
 import { GroupsContext } from "../../context/GroupsContext"
 import Dialog from "../dialog/Dialog";
 import Api from "../../api/Api";
+
+const useOutsideAlerter = (ref, handleClose) => {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        // alert("You clicked outside of me!");
+        // event.stopPropagation();
+        handleClose();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+};
 
 const HeaderGroups = () => {
   const { addGroup, user } = useContext(GroupsContext);
@@ -16,13 +36,12 @@ const HeaderGroups = () => {
   const [toggleJoin, setToggleJoin] = useState(false);
   const [joinId, setJoinId] = useState("");
 
+  const toggleAddRef = useRef(null);
+  useOutsideAlerter(toggleAddRef, () => setToggleAdd(false));
+
   const logout = () => {
     localStorage.removeItem("TOKEN");
     history("/");
-  };
-
-  const toggleAddClick = () => {
-    setToggleAdd(!toggleAdd);
   };
 
   const handleCreate = () => {
@@ -54,12 +73,7 @@ const HeaderGroups = () => {
           "Content-Type": "application/json"
         }
       };
-      const newGroup = await axios({
-        method: "post",
-        url: "https://localhost:44343/api/Group/add-with-identificator",
-        headers: getConfig.headers,
-        data: JSON.stringify(joinId)
-      });
+      const newGroup = await Api.post("/Group/add-with-identificator", joinId, getConfig);
       addGroup(newGroup.data);
     } catch(err) {
       console.error(err.message);
@@ -94,11 +108,13 @@ const HeaderGroups = () => {
           </div>
 
           <div className="headerContentEnd">
-            <Add className="add" onClick={() => toggleAddClick()} />
-            {toggleAdd ? <div className="toggleAdd">
-              { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={() => handleCreate()}>Create a project</button> : null }
-              <button className="toggleAddButton" onClick={() => handleJoin()}>Join the project</button>
-            </div> : null }
+            { !toggleAdd ? <Add className="add" onClick={() => setToggleAdd(!toggleAdd)} /> : null }
+            { toggleAdd ? <Add className="add" /> : null }
+            {toggleAdd ? 
+              <div ref={toggleAddRef} className="toggleAdd">
+                { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
+                <button className="toggleAddButton" onClick={handleJoin}>Join the project</button>
+              </div> : null }
             <div className="avatar">
               <a href="/">
                 <div className="avatarCircle">

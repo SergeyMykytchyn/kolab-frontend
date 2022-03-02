@@ -1,9 +1,30 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./GroupCard.css";
 import { MoreVert } from "@mui/icons-material";
 import Api from "../../api/Api";
 import { GroupsContext } from "../../context/GroupsContext"
 // import { getConfig } from "../../constants";
+
+const useOutsideAlerter = (ref, handleClose) => {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        // alert("You clicked outside of me!");
+        // event.stopPropagation();
+        handleClose();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+};
 
 const GroupCard = ({ group }) => {
   const { removeGroup, createGroup, user } = useContext(GroupsContext);
@@ -11,6 +32,9 @@ const GroupCard = ({ group }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(group.name);
   const [description, setDescription] = useState(group.description);
+
+  const toggleMoreVertRef = useRef(null);
+  useOutsideAlerter(toggleMoreVertRef, () => setToggleMoreVert(false));
 
   const handleEdit = async () => {
     try {
@@ -108,8 +132,9 @@ const GroupCard = ({ group }) => {
           backgroundImage: "url('./assets/backgroundImage.svg')"
         }}
       >
-        <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} />
-        {toggleMoreVert ? <div className="toggleMoreVert">
+        { !toggleMoreVert ? <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} /> : null }
+        { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
+        {toggleMoreVert ? <div ref={toggleMoreVertRef} className="toggleMoreVert">
           {user.data.role === "teacher" ? 
             <button className="toggleMoreVertButton" onClick={() => { 
               setIsEditing(!isEditing);
