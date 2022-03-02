@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./GroupCard.css";
+import GeoPattern from "geopattern";
 import { MoreVert } from "@mui/icons-material";
 import Api from "../../api/Api";
 import { GroupsContext } from "../../context/GroupsContext"
@@ -129,7 +130,7 @@ const GroupCard = ({ group }) => {
       <div
         className="group-cardHeader"
         style={{
-          backgroundImage: "url('./assets/backgroundImage.svg')"
+          backgroundImage: GeoPattern.generate(name).toDataUrl()
         }}
       >
         { !toggleMoreVert ? <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} /> : null }
