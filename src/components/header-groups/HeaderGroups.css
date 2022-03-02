@@ -116,3 +116,14 @@
 .toggleAddButton:hover {
   background: rgba(0, 0, 0, 0.04);
 }
+
+.dialog-join-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.dialog-join-input {
+  margin-bottom: 12px;
+}
