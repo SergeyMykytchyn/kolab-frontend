@@ -29,7 +29,7 @@ const useOutsideAlerter = (ref, handleClose) => {
   }, [ref]);
 };
 
-const HeaderGroups = ({ displayAdd }) => {
+const HeaderGroups = ({ title, displayAdd }) => {
   const { addGroup, user } = useContext(GroupsContext);
   const history = useNavigate();
 
@@ -104,8 +104,8 @@ const HeaderGroups = ({ displayAdd }) => {
         <div className="headerContent">
 
           <div className="headerContentStart">
-            <a href="/"><img className="logo" src={`${HOST}/assets/kolab-logo.svg`} alt="Kolab" /></a>
-            <span className="headerContentStartTitle">Dashboard</span>
+            <a href="/groups"><img className="logo" src={`${HOST}/assets/kolab-logo.svg`} alt="Kolab" /></a>
+            <span className="headerContentStartTitle">{title}</span>
           </div>
 
           <div className="headerContentEnd">

@@ -1,0 +1,18 @@
+.postsListContainer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.add-new-task-header {
+  display: flex;
+  align-items: center;
+}
+
+.add-new-task-text {
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  margin-left: 8px;
+}
