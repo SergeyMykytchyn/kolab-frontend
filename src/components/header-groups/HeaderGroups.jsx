@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { GroupsContext } from "../../context/GroupsContext"
 import Dialog from "../dialog/Dialog";
 import Api from "../../api/Api";
+import { HOST } from "../../constants/index";
 
 const useOutsideAlerter = (ref, handleClose) => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const useOutsideAlerter = (ref, handleClose) => {
   }, [ref]);
 };
 
-const HeaderGroups = () => {
+const HeaderGroups = ({ displayAdd }) => {
   const { addGroup, user } = useContext(GroupsContext);
   const history = useNavigate();
 
@@ -103,14 +104,14 @@ const HeaderGroups = () => {
         <div className="headerContent">
 
           <div className="headerContentStart">
-            <a href="/"><img className="logo" src="./assets/kolab-logo.svg" alt="Kolab" /></a>
+            <a href="/"><img className="logo" src={`${HOST}/assets/kolab-logo.svg`} alt="Kolab" /></a>
             <span className="headerContentStartTitle">Dashboard</span>
           </div>
 
           <div className="headerContentEnd">
-            { !toggleAdd ? <Add className="add" onClick={() => setToggleAdd(!toggleAdd)} /> : null }
-            { toggleAdd ? <Add className="add" /> : null }
-            {toggleAdd ? 
+            { displayAdd && !toggleAdd ? <Add className="add" onClick={() => setToggleAdd(!toggleAdd)} /> : null }
+            { displayAdd && toggleAdd ? <Add className="add" /> : null }
+            { toggleAdd ? 
               <div ref={toggleAddRef} className="toggleAdd">
                 { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
                 <button className="toggleAddButton" onClick={handleJoin}>Join the project</button>
@@ -118,7 +119,7 @@ const HeaderGroups = () => {
             <div className="avatar">
               <a href="/">
                 <div className="avatarCircle">
-                  <img className="avatarIcon" src="./assets/avatar.svg" alt="avatar" />
+                  <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" />
                 </div>
               </a>
             </div>

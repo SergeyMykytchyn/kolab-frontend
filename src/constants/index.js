@@ -4,3 +4,5 @@ export const getConfig = {
     "Accept": "application/json"
   }
 };
+
+export const HOST = "http://localhost:3000";
