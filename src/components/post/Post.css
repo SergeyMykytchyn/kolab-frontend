@@ -38,3 +38,14 @@
   font-size: 18px;
   letter-spacing: 1px;
 }
+
+.post-discussion {
+  margin-bottom: 18px;
+}
+
+.post-discussion-title {
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}

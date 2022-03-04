@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Post.css";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -6,8 +6,17 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import TextField from "@mui/material/TextField";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Api from "../../api/Api";
+import { PostsContext } from "../../context/PostsContext";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const Post = ({ post }) => {
+  const { updatePost } = useContext(PostsContext);
   const [messageBody, setMessageBody] = useState("");
 
   const handleSend = async () => {
@@ -23,9 +32,20 @@ const Post = ({ post }) => {
         }
       };
       const response = await Api.post("/Form", payload, getConfig);
-      console.log(response);
+      const updatedPost = await Api.get(`/Post/${response.data.postId}`, getConfig);
+      updatePost(updatedPost.data);
     } catch(err) {
       console.error(err.message);
+    }
+  }
+
+  let rows = [];
+  if (post.forms) {
+    for (let i = 0; i < post.forms.length; i++) {
+      rows.push({ 
+        user: post.forms[i].user.firstName + post.forms[i].user.lastName,
+        content: post.forms[i].content
+      });
     }
   }
 
@@ -53,6 +73,34 @@ const Post = ({ post }) => {
           <div className="post-body-description">
             <span >{post.description}</span>
           </div>
+          { post.forms ? 
+            <div className="post-discussion">
+              <div className="post-discussion-title">
+                <span >Discussion:</span>
+              </div>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>User</TableCell>
+                      <TableCell>Message</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.reverse().map((row) => (
+                      <TableRow
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.user}
+                        </TableCell>
+                        <TableCell>{row.content}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div> : null}
           <div className="post-send-message">
             <div className="post-send-message-title">
               <span >Send a message:</span>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./PostsList.css";
 import Accordion from '@mui/material/Accordion';
@@ -8,9 +8,11 @@ import TextField from "@mui/material/TextField";
 import { Add } from "@mui/icons-material";
 import Api from "../../api/Api";
 import Post from "../post/Post";
+import { PostsContext } from "../../context/PostsContext";
 
-const PostsList = ({ posts, addNewPost }) => {
+const PostsList = () => {
   const { groupId } = useParams();
+  const { posts, addNewPost } = useContext(PostsContext);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 

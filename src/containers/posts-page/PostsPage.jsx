@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import HeaderGroups from "../../components/header-groups/HeaderGroups";
 import PostsList from "../../components/posts-list/PostsList";
 import Api from "../../api/Api";
+import { PostsContext } from "../../context/PostsContext";
 
 const PostsPage = () => {
   const { groupId } = useParams();
-  const [posts, setPosts] = useState([]);
+  const { setPosts } = useContext(PostsContext);
   const [group, setGroup] = useState({});
-
-  const addNewPost = (newPost) => {
-    setPosts([...posts, newPost]);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +35,7 @@ const PostsPage = () => {
   return (
     <>
       <HeaderGroups displayAdd={false} title={`Project: ${group.name}`}/>
-      <PostsList posts={posts} addNewPost={addNewPost} />
+      <PostsList />
     </>
   );
 };
