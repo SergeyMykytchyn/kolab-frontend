@@ -4,10 +4,12 @@ import HeaderGroups from "../../components/header-groups/HeaderGroups";
 import PostsList from "../../components/posts-list/PostsList";
 import Api from "../../api/Api";
 import { PostsContext } from "../../context/PostsContext";
+import { GroupsContext } from "../../context/GroupsContext";
 
 const PostsPage = () => {
   const { groupId } = useParams();
   const { setPosts } = useContext(PostsContext);
+  const { setUser } = useContext(GroupsContext);
   const [group, setGroup] = useState({});
 
   useEffect(() => {
@@ -23,6 +25,8 @@ const PostsPage = () => {
         setPosts(response.data);
         response = await Api.get(`/Group/${groupId}`, getConfig);
         setGroup(response.data);
+        const user = await Api.get("/User/user-info", getConfig);
+        setUser(user);
       } catch(err) {
         console.error(err.message);
       }

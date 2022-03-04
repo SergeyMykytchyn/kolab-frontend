@@ -52,8 +52,6 @@ const SignUpForm = () => {
     }
   };
 
-  console.log(role);
-
   return (
     <form className="sign-up-form">
       <div className="sign-up-card">

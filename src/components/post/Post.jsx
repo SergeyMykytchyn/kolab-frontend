@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Api from "../../api/Api";
 import { PostsContext } from "../../context/PostsContext";
+import { GroupsContext } from "../../context/GroupsContext";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,6 +18,7 @@ import Paper from '@mui/material/Paper';
 
 const Post = ({ post }) => {
   const { updatePost } = useContext(PostsContext);
+  const { user } = useContext(GroupsContext);
   const [messageBody, setMessageBody] = useState("");
 
   const handleSend = async () => {
@@ -31,8 +33,13 @@ const Post = ({ post }) => {
           "Accept": "application/json"
         }
       };
-      const response = await Api.post("/Form", payload, getConfig);
-      const updatedPost = await Api.get(`/Post/${response.data.postId}`, getConfig);
+      let response;
+      if (post.forms && post.forms.find(item => item.user.id === user.data.id)) {
+        response = await Api.put("/Form", {...payload, id: post.forms.find(item => item.user.id === user.data.id).id }, getConfig);
+      } else {
+        response = await Api.post("/Form", payload, getConfig);
+      }
+      const updatedPost = await Api.get(`/Post/${post.id}`, getConfig);
       updatePost(updatedPost.data);
     } catch(err) {
       console.error(err.message);
@@ -43,7 +50,7 @@ const Post = ({ post }) => {
   if (post.forms) {
     for (let i = 0; i < post.forms.length; i++) {
       rows.push({ 
-        user: post.forms[i].user.firstName + post.forms[i].user.lastName,
+        user: post.forms[i].user.firstName + " " + post.forms[i].user.lastName,
         content: post.forms[i].content
       });
     }
@@ -73,7 +80,7 @@ const Post = ({ post }) => {
           <div className="post-body-description">
             <span >{post.description}</span>
           </div>
-          { post.forms ? 
+          { post.forms && post.forms.length > 0 ? 
             <div className="post-discussion">
               <div className="post-discussion-title">
                 <span >Discussion:</span>
