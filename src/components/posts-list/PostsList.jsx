@@ -5,8 +5,6 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import TextField from "@mui/material/TextField";
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Add } from "@mui/icons-material";
 import Api from "../../api/Api";
 import Post from "../post/Post";
@@ -38,7 +36,7 @@ const PostsList = ({ posts, addNewPost }) => {
 
   return (
     <div className="postsListContainer">
-      <Accordion>
+      <Accordion sx={{ borderRadius: "4px" }}>
         <AccordionSummary
           sx={{
             minHeight: "80px",

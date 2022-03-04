@@ -7,6 +7,7 @@ import Api from "../../api/Api";
 const PostsPage = () => {
   const { groupId } = useParams();
   const [posts, setPosts] = useState([]);
+  const [group, setGroup] = useState({});
 
   const addNewPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -21,8 +22,10 @@ const PostsPage = () => {
             "Accept": "application/json"
           }
         };
-        const response = await Api.get(`/Post/?groupId=${groupId}`, getConfig);
+        let response = await Api.get(`/Post/?groupId=${groupId}`, getConfig);
         setPosts(response.data);
+        response = await Api.get(`/Group/${groupId}`, getConfig);
+        setGroup(response.data);
       } catch(err) {
         console.error(err.message);
       }
@@ -34,7 +37,7 @@ const PostsPage = () => {
 
   return (
     <>
-      <HeaderGroups displayAdd={false} title={`Project:`}/>
+      <HeaderGroups displayAdd={false} title={`Project: ${group.name}`}/>
       <PostsList posts={posts} addNewPost={addNewPost} />
     </>
   );
