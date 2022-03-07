@@ -106,7 +106,9 @@ const GroupCard = ({ group }) => {
           "Accept": "application/json"
         }
       };
-      const response = await Api.delete(`/Group/${group.id}`, getConfig);
+      if (group.id !== Infinity) {
+        const response = await Api.delete(`/Group/${group.id}`, getConfig);
+      }
       removeGroup(group);
     } catch(err) {
       console.error(err.message);
@@ -118,8 +120,11 @@ const GroupCard = ({ group }) => {
       () => console.log('Successful copy'),
       () => console.log('Cannot copy!')
     );
+    setToggleMoreVert(false);
   };
 
+
+  console.log(`group.name ${group.name} group.userId ${group.userId}, user.id ${user.data.id}`);
   return (
     <div className="group-card">
       <div className="group-cardavatar">
@@ -136,15 +141,15 @@ const GroupCard = ({ group }) => {
         { !toggleMoreVert ? <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} /> : null }
         { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
         {toggleMoreVert ? <div ref={toggleMoreVertRef} className="toggleMoreVert">
-          {user.data.role === "teacher" ? 
+          {user.data.role === "teacher" && group.userId === user.data.id ? 
             <button className="toggleMoreVertButton" onClick={() => { 
               setIsEditing(!isEditing);
               setToggleMoreVert(!toggleMoreVert);
             }}>
               Edit
             </button> : null}
-          <button className="toggleMoreVertButton" onClick={() => handleLeave()}>Leave</button>
-          {user.data.role === "teacher" ? <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button> : null}
+          { group.userId !== user.data.id ? <button className="toggleMoreVertButton" onClick={() => handleLeave()}>Leave</button> : null }
+          {user.data.role === "teacher" && group.userId === user.data.id ? <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button> : null}
           <button className="toggleMoreVertButton" onClick={() => handleCopyId()}>Copy id</button>
         </div> : null }
       </div>

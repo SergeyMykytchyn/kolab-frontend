@@ -47,7 +47,7 @@ const HeaderGroups = ({ title, displayAdd }) => {
 
   const handleCreate = () => {
     const newGroup = {
-      id: -1,
+      id: Infinity,
       name: "Name",
       description: "Description",
       creator: {
@@ -74,7 +74,7 @@ const HeaderGroups = ({ title, displayAdd }) => {
           "Content-Type": "application/json"
         }
       };
-      const newGroup = await Api.post("/Group/add-with-identificator", joinId, getConfig);
+      const newGroup = await Api.post("/Group/add-with-identificator", { identificator: joinId }, getConfig);
       addGroup(newGroup.data);
     } catch(err) {
       console.error(err.message);

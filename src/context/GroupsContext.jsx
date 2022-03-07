@@ -7,7 +7,7 @@ export const GroupsContextProvider = (props) => {
   const [groups, setGroups] = useState([]);
 
   const addGroup = (group) => {
-    setGroups([...groups, group]);
+    setGroups([...groups, group].sort((a, b) => a.id - b.id));
   };
 
   const removeGroup = (group) => {
