@@ -34,11 +34,12 @@ const Post = ({ post }) => {
         }
       };
       let response;
-      if (post.forms && post.forms.find(item => item.user.id === user.data.id)) {
-        response = await Api.put("/Form", {...payload, id: post.forms.find(item => item.user.id === user.data.id).id }, getConfig);
-      } else {
-        response = await Api.post("/Form", payload, getConfig);
-      }
+      // if (post.forms && post.forms.find(item => item.user.id === user.data.id)) {
+      //   response = await Api.put("/Form", {...payload, id: post.forms.find(item => item.user.id === user.data.id).id }, getConfig);
+      // } else {
+      //   response = await Api.post("/Form", payload, getConfig);
+      // }
+      response = await Api.post("/Form", payload, getConfig);
       const updatedPost = await Api.get(`/Post/${post.id}`, getConfig);
       updatePost(updatedPost.data);
     } catch(err) {
@@ -94,7 +95,7 @@ const Post = ({ post }) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {rows.reverse().map((row) => (
+                    {rows.map((row) => (
                       <TableRow
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >

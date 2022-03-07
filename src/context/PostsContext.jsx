@@ -6,7 +6,7 @@ export const PostsContextProvider = (props) => {
   const [posts, setPosts] = useState([]);
 
   const addNewPost = (newPost) => {
-    setPosts([...posts, newPost]);
+    setPosts([...posts, newPost].sort((a, b) => b.id - a.id));
   };
 
   const updatePost = (post) => {
@@ -15,7 +15,7 @@ export const PostsContextProvider = (props) => {
         return post;
       }
       return item;
-    }));
+    }).sort((a, b) => b.id - a.id));
   };
 
   return (

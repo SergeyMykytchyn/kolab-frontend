@@ -22,7 +22,7 @@ const PostsPage = () => {
           }
         };
         let response = await Api.get(`/Post/?groupId=${groupId}`, getConfig);
-        setPosts(response.data);
+        setPosts(response.data.sort((a, b) => b.id - a.id));
         response = await Api.get(`/Group/${groupId}`, getConfig);
         setGroup(response.data);
         const user = await Api.get("/User/user-info", getConfig);

@@ -123,8 +123,6 @@ const GroupCard = ({ group }) => {
     setToggleMoreVert(false);
   };
 
-
-  console.log(`group.name ${group.name} group.userId ${group.userId}, user.id ${user.data.id}`);
   return (
     <div className="group-card">
       <div className="group-cardavatar">
