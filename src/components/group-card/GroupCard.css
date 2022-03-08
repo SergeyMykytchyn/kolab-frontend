@@ -21,13 +21,13 @@
     0px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-.group-cardavatar {
+.group-card-avatar {
   position: absolute;
   top: 63px;
   right: 20px;
 }
 
-.group-cardavatarCircle {
+.group-card-avatarCircle {
   width: 74px;
   height: 74px;
 
@@ -42,12 +42,12 @@
   background-repeat: no-repeat;
 }
 
-.group-cardavatarCircleIcon {
+.group-card-avatarCircleIcon {
   width: 40px;
   height: 40px;
 }
 
-.group-cardHeader {
+.group-card-Header {
   width: 100%;
   height: 100px;
 
@@ -57,7 +57,7 @@
   border-radius: 8px 8px 0 0;
 }
 
-.group-cardContent {
+.group-card-Content {
   width: 100%;
 
   display: flex;
@@ -66,7 +66,7 @@
   padding: 10px 20px 18px 20px;
 }
 
-.group-cardContentName {
+.group-card-ContentName {
   width: 170px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -79,15 +79,15 @@
   margin-bottom: 2px;
 }
 
-.group-cardContentNameInput {
+.group-card-ContentNameInput {
   width: 150px;
 }
 
-.group-cardContentDescriptionInput {
+.group-card-ContentDescriptionInput {
   width: 250px;
 }
 
-.group-cardContentCreator {
+.group-card-ContentCreator {
   width: 170px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -100,7 +100,7 @@
   margin-bottom: 2px;
 }
 
-.group-cardContentDescription {
+.group-card-ContentDescription {
   width: 260px;
 
   text-overflow: ellipsis;
@@ -147,7 +147,7 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
-.group-cardContentEdit {
+.group-card-ContentEdit {
   background: none;
   border: none;
   cursor: pointer;

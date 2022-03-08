@@ -66,6 +66,9 @@
   align-items: center;
 
   margin-right: 4px;
+
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .avatarIcon {

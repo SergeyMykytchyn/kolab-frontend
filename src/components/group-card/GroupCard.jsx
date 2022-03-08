@@ -3,7 +3,8 @@ import "./GroupCard.css";
 import GeoPattern from "geopattern";
 import { MoreVert } from "@mui/icons-material";
 import Api from "../../api/Api";
-import { GroupsContext } from "../../context/GroupsContext"
+import { GroupsContext } from "../../context/GroupsContext";
+import { SERVER_HOST } from "../../constants/index";
 // import { getConfig } from "../../constants";
 
 const useOutsideAlerter = (ref, handleClose) => {
@@ -125,13 +126,13 @@ const GroupCard = ({ group }) => {
 
   return (
     <div className="group-card">
-      <div className="group-cardavatar">
-        <div className="group-cardavatarCircle">
-          <img className="group-cardavatarCircleIcon" src="./assets/avatar.svg" alt="avatar" />
+      <div className="group-card-avatar">
+        <div className="group-card-avatarCircle" style={{ backgroundImage: user.data && user.data.img ? `url('${SERVER_HOST}/${user.data.img}')` : null }}>
+          { user.data && !user.data.img ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
         </div>
       </div>
       <div
-        className="group-cardHeader"
+        className="group-card-Header"
         style={{
           backgroundImage: GeoPattern.generate(name).toDataUrl()
         }}
@@ -151,26 +152,26 @@ const GroupCard = ({ group }) => {
           <button className="toggleMoreVertButton" onClick={() => handleCopyId()}>Copy id</button>
         </div> : null }
       </div>
-      <div className="group-cardContent">
+      <div className="group-card-Content">
         
-        <div className="group-cardContentName">
+        <div className="group-card-ContentName">
           {group.isCreating || isEditing ? 
-            <input onChange={e => setName(e.target.value)} value={name} className="group-cardContentNameInput" /> : 
+            <input onChange={e => setName(e.target.value)} value={name} className="group-card-ContentNameInput" /> : 
             <a href={`/posts/${group.id}`}><span>{name}</span></a> }
         </div>
         
-        <div className="group-cardContentCreator">
+        <div className="group-card-ContentCreator">
           <span>{group.creator.firstName + ' ' + group.creator.lastName}</span>
         </div>
 
-        <div className="group-cardContentDescription">
+        <div className="group-card-ContentDescription">
           {group.isCreating || isEditing ? 
             <input onChange={e => setDescription(e.target.value)} value={description} className="group-cardContentDescriptionInput" /> : 
             <span>{description}</span> }
         </div>
 
-        {isEditing ? <button className="group-cardContentEdit" onClick={() => handleEdit()}>Save</button> : null}
-        {group.isCreating ? <button className="group-cardContentEdit" onClick={() => handleCreate()}>Save</button> : null}
+        {isEditing ? <button className="group-card-ContentEdit" onClick={() => handleEdit()}>Save</button> : null}
+        {group.isCreating ? <button className="group-card-ContentEdit" onClick={() => handleCreate()}>Save</button> : null}
         
       </div>
     </div>

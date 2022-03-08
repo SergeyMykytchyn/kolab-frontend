@@ -112,7 +112,7 @@ const ProfileForm = () => {
               {isShown ? <label className="file-input-label" htmlFor="file-input" >
                 <AddAPhotoIcon className="add-photo-icon"/>
               </label> : null }
-              { !user.img ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+              { !user.img && !file ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
             </div>
 
             <TextField
