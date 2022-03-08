@@ -1,6 +1,7 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useRef } from "react";
 import "./ProfileForm.css";
 import TextField from "@mui/material/TextField";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { GroupsContext } from "../../context/GroupsContext";
 import Api from "../../api/Api";
 import { SERVER_HOST } from "../../constants/index";
@@ -17,6 +18,11 @@ const ProfileForm = () => {
 
   const [isIncorrectData, setIsIncorrectData] = useState(false);
   const [successfullUpdate, setSuccessfullUpdate] = useState(false);
+
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,13 +55,13 @@ const ProfileForm = () => {
           "Accept": "application/json"
         }
       };
-      const payload = {
-        firstName,
-        lastName,
-        email,
-        password
-      };
-      Api.put("/User/update", payload, getConfig)
+      const formData = new FormData();
+      formData.append("firstName", firstName);
+      formData.append("lastName", lastName);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("img", file);
+      Api.put("/User/update", formData, getConfig)
         .then(response => {
           setUser(response.data);
           setSuccessfullUpdate("Your data has been successfully updated");
@@ -65,6 +71,14 @@ const ProfileForm = () => {
       console.error(err.message);
     }
   };
+
+  const handleUploadClick = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const binaryData = []
+  binaryData.push(file);
+  const fileURL = new Blob(binaryData, {type: "image/*"}); 
 
   return (
     <>
@@ -94,9 +108,13 @@ const ProfileForm = () => {
         </Dialog> : null }
       <form className="profile-form-container">
         <div className="profile-form">
-          <div className="profile-avatarCircle" style={{ backgroundImage: user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
-            { !user.img ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
-          </div>
+            <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle" style={{ backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
+              <input id="file-input" ref={fileInputRef} type="file" accept="image/*" onChange={handleUploadClick} hidden/>
+              {isShown ? <label className="file-input-label" htmlFor="file-input" >
+                <AddAPhotoIcon className="add-photo-icon"/>
+              </label> : null }
+              { !user.img ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+            </div>
 
             <TextField
               sx={{

@@ -18,6 +18,9 @@
 }
 
 .profile-avatarCircle {
+  overflow: hidden;
+  position: relative;
+
   width: 96px;
   height: 97px;
 
@@ -38,4 +41,21 @@
 .profile-avatarIcon {
   width: 44px;
   height: 44px;
+}
+
+.add-photo-icon {
+  color: white;
+  position: absolute;
+  bottom: 22%;
+  right: 38%;
+}
+
+.file-input-label {
+  cursor: pointer;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  background-color: rgba(32, 33, 36, 0.6);
+  transition: opacity 0.2s ease-in-out;
 }
