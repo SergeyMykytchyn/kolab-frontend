@@ -81,8 +81,7 @@ const GroupCard = ({ group }) => {
       const newGroup = {
         ...response.data,
         creator: {
-          firstName: user.data.firstName,
-          lastName: user.data.lastName
+          ...user.data
         }
       };
       createGroup(newGroup, group);
@@ -138,6 +137,8 @@ const GroupCard = ({ group }) => {
   const binaryData = []
   binaryData.push(file);
   const fileURL = new Blob(binaryData, {type: "image/*"});
+
+  console.log(group.creator.img);
 
   return (
     <div className="group-card">
