@@ -138,8 +138,6 @@ const GroupCard = ({ group }) => {
   binaryData.push(file);
   const fileURL = new Blob(binaryData, {type: "image/*"});
 
-  console.log(group.creator.img);
-
   return (
     <div className="group-card">
       <div className="group-card-avatar">
