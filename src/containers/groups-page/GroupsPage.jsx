@@ -14,7 +14,10 @@ const GroupsPage = () => {
         const getConfig = {
           headers: {
             "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0"
           }
         };
         const user = await Api.get("/User/user-info", getConfig);
