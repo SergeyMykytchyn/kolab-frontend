@@ -22,6 +22,7 @@
 }
 
 .group-card-avatar {
+  z-index: 1;
   position: absolute;
   top: 63px;
   right: 20px;
@@ -48,6 +49,8 @@
 }
 
 .group-card-Header {
+  position: relative;
+
   width: 100%;
   height: 100px;
 
@@ -55,6 +58,9 @@
   justify-content: flex-end;
 
   border-radius: 8px 8px 0 0;
+
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .group-card-Content {
@@ -161,4 +167,23 @@
   border-radius: 4px;
 
   margin-top: 8px;
+}
+
+.cover-file-input-label {
+  cursor: pointer;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(32, 33, 36, 0.6);
+  transition: opacity 0.2s ease-in-out;
+}
+
+.cover-add-photo-icon {
+  color: white;
+  position: absolute;
+  bottom: 22%;
+  right: 45%;
+  width: 30px !important;
+  height: 30px !important;
 }

@@ -52,10 +52,10 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
       name: "Name",
       description: "Description",
       creator: {
-        firstName: user.data.firstName,
-        lastName: user.data.lastName
+        ...user.data
       },
-      isCreating: true
+      isCreating: true,
+      userId: user.data.id
     };
     setToggleAdd(false);
     addGroup(newGroup);

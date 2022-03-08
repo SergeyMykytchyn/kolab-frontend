@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import "./ProfileForm.css";
 import TextField from "@mui/material/TextField";
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { GroupsContext } from "../../context/GroupsContext";
 import Api from "../../api/Api";
 import { SERVER_HOST } from "../../constants/index";
@@ -107,63 +107,63 @@ const ProfileForm = () => {
         </Dialog> : null }
       <form className="profile-form-container">
         <div className="profile-form">
-            <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle" style={{ backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
-              <input id="file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
-              {isShown ? <label className="file-input-label" htmlFor="file-input" >
-                <AddAPhotoIcon className="add-photo-icon"/>
-              </label> : null }
-              { !user.img && !file ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
-            </div>
+          <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle" style={{ backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
+            <input id="avatar-file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
+            {isShown ? <label className="file-input-label" htmlFor="avatar-file-input" >
+              <AddAPhotoIcon className="add-photo-icon"/>
+            </label> : null }
+            { !user.img && !file ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+          </div>
 
-            <TextField
-              sx={{
-                marginBottom: "16px"
-              }}
-              label="First name"
-              variant="filled"
-              fullWidth
-              value={firstName}
-              onChange={e => setFirstName(e.target.value)}
-            />
+          <TextField
+            sx={{
+              marginBottom: "16px"
+            }}
+            label="First name"
+            variant="filled"
+            fullWidth
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+          />
 
-            <TextField
-              sx={{
-                marginBottom: "16px"
-              }}
-              label="Last name"
-              variant="filled"
-              fullWidth
-              value={lastName}
-              onChange={e => setLastName(e.target.value)}
-            />
+          <TextField
+            sx={{
+              marginBottom: "16px"
+            }}
+            label="Last name"
+            variant="filled"
+            fullWidth
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+          />
 
-            <TextField
-              sx={{
-                marginBottom: "16px"
-              }}
-              label="Email"
-              variant="filled"
-              fullWidth
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
+          <TextField
+            sx={{
+              marginBottom: "16px"
+            }}
+            label="Email"
+            variant="filled"
+            fullWidth
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
 
-            <TextField
-              sx={{
-                marginBottom: "16px"
-              }}
-              label="Password"
-              variant="filled"
-              fullWidth
-              type="password"
-              autoComplete="new-password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
+          <TextField
+            sx={{
+              marginBottom: "16px"
+            }}
+            label="Password"
+            variant="filled"
+            fullWidth
+            type="password"
+            autoComplete="new-password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
 
-            <button className="submitButton" onClick={handleSubmit}>
-              <span className="submitButtonText">Save</span>
-            </button>
+          <button className="submitButton" onClick={handleSubmit}>
+            <span className="submitButtonText">Save</span>
+          </button>
 
         </div>
       </form>
