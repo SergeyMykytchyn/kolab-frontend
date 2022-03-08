@@ -4,10 +4,10 @@ import SignInForm from "../../components/sign-in-form/SignInForm";
 
 const SignInPage = () => {
   return (
-    <div>
+    <>
       <HeaderSign />
       <SignInForm />
-    </div>
+    </>
   );
 };
 

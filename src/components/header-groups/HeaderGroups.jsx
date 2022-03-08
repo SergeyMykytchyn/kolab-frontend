@@ -29,7 +29,7 @@ const useOutsideAlerter = (ref, handleClose) => {
   }, [ref]);
 };
 
-const HeaderGroups = ({ title, displayAdd }) => {
+const HeaderGroups = ({ title, displayAdd, profile }) => {
   const { addGroup, user } = useContext(GroupsContext);
   const history = useNavigate();
 
@@ -116,13 +116,14 @@ const HeaderGroups = ({ title, displayAdd }) => {
                 { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
                 <button className="toggleAddButton" onClick={handleJoin}>Join the project</button>
               </div> : null }
-            <div className="avatar">
-              <a href="/">
-                <div className="avatarCircle">
-                  <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" />
-                </div>
-              </a>
-            </div>
+            { !profile ? 
+              <div className="avatar">
+                <a href="/profile">
+                  <div className="avatarCircle">
+                    <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" />
+                  </div>
+                </a>
+              </div> : null}
             <Logout className="logout" onClick={() => logout()} />
           </div>
 

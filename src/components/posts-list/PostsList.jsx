@@ -28,7 +28,7 @@ const PostsList = () => {
           }
         };
         const user = await Api.get("/User/user-info", getConfig);
-        setUser(user);
+        setUser(user.data);
       } catch(err) {
         console.error(err);
       }
@@ -59,7 +59,7 @@ const PostsList = () => {
 
   return (
     <div className="postsListContainer">
-      { user.data && user.data.role === "teacher" ? 
+      { user && user.role === "teacher" ? 
         <Accordion sx={{ borderRadius: "4px" }}>
           <AccordionSummary
             sx={{

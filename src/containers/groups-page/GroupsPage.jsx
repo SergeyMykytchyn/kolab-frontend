@@ -34,7 +34,7 @@ const GroupsPage = () => {
 
   return (
     <>
-      <HeaderGroups displayAdd={true} title="Dashboard" />
+      <HeaderGroups displayAdd={true} profile={false} title="Dashboard" />
       <GroupsGrid />
     </>
   );
