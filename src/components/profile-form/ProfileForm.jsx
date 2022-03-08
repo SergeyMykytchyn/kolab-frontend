@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState, useRef } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import "./ProfileForm.css";
 import TextField from "@mui/material/TextField";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
@@ -20,7 +20,6 @@ const ProfileForm = () => {
   const [successfullUpdate, setSuccessfullUpdate] = useState(false);
 
   const [file, setFile] = useState(null);
-  const fileInputRef = useRef(null);
 
   const [isShown, setIsShown] = useState(false);
 
@@ -109,7 +108,7 @@ const ProfileForm = () => {
       <form className="profile-form-container">
         <div className="profile-form">
             <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle" style={{ backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
-              <input id="file-input" ref={fileInputRef} type="file" accept="image/*" onChange={handleUploadClick} hidden/>
+              <input id="file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
               {isShown ? <label className="file-input-label" htmlFor="file-input" >
                 <AddAPhotoIcon className="add-photo-icon"/>
               </label> : null }
