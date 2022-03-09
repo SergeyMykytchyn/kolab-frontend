@@ -6,6 +6,7 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Api from "../../api/Api";
 import { GroupsContext } from "../../context/GroupsContext";
 import { SERVER_HOST } from "../../constants/index";
+import { imageExists } from "../../utils/index";
 // import { getConfig } from "../../constants";
 
 const useOutsideAlerter = (ref, handleClose) => {
@@ -35,6 +36,9 @@ const GroupCard = ({ group }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(group.name);
   const [description, setDescription] = useState(group.description);
+
+  const [imageCoverExistsValue, setImageCoverExistsValue] = useState(false);
+  const [imageExistsValue, setImageExistsValue] = useState(false);
 
   const [file, setFile] = useState(null);
 
@@ -138,17 +142,43 @@ const GroupCard = ({ group }) => {
   binaryData.push(file);
   const fileURL = new Blob(binaryData, {type: "image/*"});
 
+  useEffect(() => {
+    const checkIfImageExists = async () => {
+      if (group.img) {
+        const result = await imageExists(group.img);
+        setImageCoverExistsValue(result);
+      } else {
+        setImageCoverExistsValue(false);
+      }
+    };
+
+    checkIfImageExists();
+  }, [group]);
+
+  useEffect(() => {
+    const checkIfImageExists = async () => {
+      if (group.creator.img) {
+        const result = await imageExists(group.creator.img);
+        setImageExistsValue(result);
+      } else {
+        setImageExistsValue(false);
+      }
+    };
+
+    checkIfImageExists();
+  }, [group]);
+
   return (
     <div className="group-card">
       <div className="group-card-avatar">
         <div className="group-card-avatarCircle" style={{ backgroundImage: group.creator.img ? `url('${SERVER_HOST}/${group.creator.img}')` : null }}>
-          { !group.creator.img ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
+          { !group.creator.img || (group.creator.img && !imageExistsValue) ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
         </div>
       </div>
       <div
         className="group-card-Header"
         style={{
-          backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : group.img ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
+          backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
         }}
       >
         { group.isCreating || isEditing ?

@@ -8,6 +8,7 @@ import Dialog from "../dialog/Dialog";
 import Api from "../../api/Api";
 import { HOST } from "../../constants/index";
 import { SERVER_HOST } from "../../constants/index";
+import { imageExists } from "../../utils/index";
 
 const useOutsideAlerter = (ref, handleClose) => {
   useEffect(() => {
@@ -37,6 +38,7 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
   const [toggleAdd, setToggleAdd] = useState(false);
   const [toggleJoin, setToggleJoin] = useState(false);
   const [joinId, setJoinId] = useState("");
+  const [imageExistsValue, setImageExistsValue] = useState(false);
 
   const toggleAddRef = useRef(null);
   useOutsideAlerter(toggleAddRef, () => setToggleAdd(false));
@@ -82,6 +84,19 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
     }
   };
 
+  useEffect(() => {
+    const checkIfImageExists = async () => {
+      if (user.data) {
+        const result = await imageExists(user.data.img);
+        setImageExistsValue(result);
+      } else {
+        setImageExistsValue(false);
+      }
+    };
+
+    checkIfImageExists();
+  }, [user]);
+
   return (
     <>
       {toggleJoin ? 
@@ -121,7 +136,7 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
               <div className="avatar">
                 <a href="/profile">
                   <div className="avatarCircle" style={{ backgroundImage: user.data && user.data.img ? `url('${SERVER_HOST}/${user.data.img}')` : null }}>
-                    { user.data && !user.data.img ? <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+                    { (user.data && !user.data.img) || (user.data && user.data.img && !imageExistsValue) ? <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
                   </div>
                 </a>
               </div> : null}

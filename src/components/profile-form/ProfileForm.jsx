@@ -7,6 +7,7 @@ import Api from "../../api/Api";
 import { SERVER_HOST } from "../../constants/index";
 import { HOST } from "../../constants/index";
 import Dialog from "../dialog/Dialog";
+import { imageExists } from "../../utils/index";
 
 const ProfileForm = () => {
   const { user, setUser } = useContext(GroupsContext);
@@ -18,6 +19,8 @@ const ProfileForm = () => {
 
   const [isIncorrectData, setIsIncorrectData] = useState(false);
   const [successfullUpdate, setSuccessfullUpdate] = useState(false);
+
+  const [imageExistsValue, setImageExistsValue] = useState(false);
 
   const [file, setFile] = useState(null);
 
@@ -44,6 +47,19 @@ const ProfileForm = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const checkIfImageExists = async () => {
+      if (user) {
+        const result = await imageExists(user.img);
+        setImageExistsValue(result);
+      } else {
+        setImageExistsValue(false);
+      }
+    };
+
+    checkIfImageExists();
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,12 +123,17 @@ const ProfileForm = () => {
         </Dialog> : null }
       <form className="profile-form-container">
         <div className="profile-form">
-          <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle" style={{ backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null }}>
+          <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle"
+            style={{
+              backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null,
+              backgroundColor: file || user.img ? null : "#76b1a6"
+            }}
+          >
             <input id="avatar-file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
             {isShown ? <label className="file-input-label" htmlFor="avatar-file-input" >
               <AddAPhotoIcon className="add-photo-icon"/>
             </label> : null }
-            { !user.img && !file ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+            { (!user.img && !file) || (!imageExistsValue && !file) ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
           </div>
 
           <TextField
