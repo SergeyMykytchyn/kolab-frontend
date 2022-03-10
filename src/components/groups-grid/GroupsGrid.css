@@ -7,3 +7,11 @@
 .groups-row {
   display: flex;
 }
+
+@media screen and (max-width: 720px) {
+  .groups-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

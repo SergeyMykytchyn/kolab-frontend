@@ -7,3 +7,9 @@ body {
   font-family: Roboto, sans-serif;
   background-color: #fbebe7;
 }
+
+@media screen and (max-width: 360px) {
+  #root {
+    width: fit-content;
+  }
+}

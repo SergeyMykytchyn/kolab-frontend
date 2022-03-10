@@ -187,3 +187,16 @@
   width: 30px !important;
   height: 30px !important;
 }
+
+@media screen and (max-width: 500px) {
+  .group-card {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .avatar {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+}
