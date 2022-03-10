@@ -40,6 +40,8 @@ const GroupCard = ({ group }) => {
   const [imageCoverExistsValue, setImageCoverExistsValue] = useState(false);
   const [imageExistsValue, setImageExistsValue] = useState(false);
 
+  const [imageCover, setImageCover] = useState(null);
+
   const [file, setFile] = useState(null);
 
   const toggleMoreVertRef = useRef(null);
@@ -135,12 +137,17 @@ const GroupCard = ({ group }) => {
   };
 
   const handleUploadClick = (e) => {
-    setFile(e.target.files[0]);
+    const binaryData = []
+    binaryData.push(e.target.files[0]);
+    const fileURL = new Blob(binaryData, {type: "image/*"});
+    setFile(fileURL);
   };
 
-  const binaryData = []
-  binaryData.push(file);
-  const fileURL = new Blob(binaryData, {type: "image/*"});
+  useEffect(() => {
+    if (file) {
+      setImageCover(window.URL.createObjectURL(file));
+    }
+  }, [file]);
 
   useEffect(() => {
     const checkIfImageExists = async () => {
@@ -178,7 +185,7 @@ const GroupCard = ({ group }) => {
       <div
         className="group-card-Header"
         style={{
-          backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
+          backgroundImage: file ? `url(${imageCover})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
         }}
       >
         { group.isCreating || isEditing ?
