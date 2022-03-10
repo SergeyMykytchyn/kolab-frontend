@@ -38,7 +38,7 @@ const PostsPage = () => {
 
   return (
     <>
-      <HeaderGroups displayAdd={false} profile={false} title={`Project: ${group.name}`}/>
+      <HeaderGroups displayAdd={false} profile={false} title={group.name}/>
       <PostsList />
     </>
   );

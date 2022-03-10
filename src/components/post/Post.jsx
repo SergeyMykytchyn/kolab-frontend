@@ -69,7 +69,7 @@ const Post = ({ post }) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         > 
-          <div className="add-new-task-header">
+          <div>
             <span className="post-header-title">{post.caption}</span>
           </div>
         </AccordionSummary>
