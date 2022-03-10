@@ -19,14 +19,16 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await Api.post("/User/sign-in", {
+      await Api.post("/User/sign-in", {
         email,
         password
+      }).then(response => {
+        localStorage.setItem("TOKEN", response.data.token);
+        history("/groups");
+      }).catch(err => {
+        setIsIncorrectData(err.response.data.message)
       });
-      localStorage.setItem("TOKEN", response.data.token);
-      history("/groups");
     } catch(err) {
-      setIsIncorrectData(true);
       console.error(err);
     }
   };
@@ -44,7 +46,7 @@ const SignInForm = () => {
           <span>Error</span>
         </div>
         <div className="overlay-pane-message">
-          <span>Email or password is wrong</span>
+          <span>{isIncorrectData}</span>
         </div>
         <div className="overlay-pane-button-wrapper">
           <button onClick={() => setIsIncorrectData(false)} className="overlay-pane-button">Ok</button>
