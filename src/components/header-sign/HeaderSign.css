@@ -70,3 +70,17 @@ a {
   height: 32px;
   width: 103px;
 }
+
+@media screen and (max-width: 600px) {
+  .sign-header {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .sign-header {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

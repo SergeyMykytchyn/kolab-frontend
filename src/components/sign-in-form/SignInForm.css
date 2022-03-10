@@ -1,10 +1,12 @@
 .sign-in-form {
-  padding: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 60px;
 }
 
 .card {
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
 
   background-color: #ffff;
   border-radius: 30px;
@@ -27,7 +29,7 @@
 
 .submitButton {
   height: 46px;
-  width: 468px;
+  width: 100%;
 
   background-color: #76b1a6;
   border: none;
