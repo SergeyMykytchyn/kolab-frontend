@@ -153,6 +153,12 @@
   }
 
   .headerContentStartTitle {
+    margin-left: 4px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .headerContentStartTitle {
     display: none;
   }
 }
