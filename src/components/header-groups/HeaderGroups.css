@@ -142,7 +142,7 @@
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 376px) {
   .headerContentStartTitle {
     margin-left: 8px;
   }
@@ -150,5 +150,9 @@
   .avatar {
     margin-left: 6px;
     margin-right: 6px;
+  }
+
+  .headerContentStartTitle {
+    display: none;
   }
 }

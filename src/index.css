@@ -8,8 +8,8 @@ body {
   background-color: #fbebe7;
 }
 
-@media screen and (max-width: 360px) {
+/* @media screen and (max-width: 376px) {
   #root {
     width: fit-content;
   }
-}
+} */
