@@ -1,10 +1,13 @@
 .profile-form-container {
-  padding: 60px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .profile-form {
   margin: 0 auto;
-  width: 500px;
+  max-width: 500px;
 
   background-color: #ffff;
   border-radius: 30px;
