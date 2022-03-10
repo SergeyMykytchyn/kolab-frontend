@@ -125,8 +125,8 @@ const ProfileForm = () => {
         <div className="profile-form">
           <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle"
             style={{
-              backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : user.img ? `url('${SERVER_HOST}/${user.img}')` : null,
-              backgroundColor: file || user.img ? null : "#76b1a6"
+              backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : (user.img && imageExistsValue) ? `url('${SERVER_HOST}/${user.img}')` : null,
+              backgroundColor: file || (user.img && imageExistsValue) ? null : "#76b1a6"
             }}
           >
             <input id="avatar-file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
