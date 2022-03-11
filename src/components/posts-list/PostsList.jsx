@@ -52,6 +52,8 @@ const PostsList = () => {
       }
       const response = await Api.post("/Post", payload, getConfig);
       addNewPost(response.data);
+      setTaskTitle("");
+      setTaskDescription("");
     } catch(err) {
       console.error(err.message);
     }

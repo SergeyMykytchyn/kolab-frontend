@@ -42,6 +42,7 @@ const Post = ({ post }) => {
       response = await Api.post("/Form", payload, getConfig);
       const updatedPost = await Api.get(`/Post/${post.id}`, getConfig);
       updatePost(updatedPost.data);
+      setMessageBody("");
     } catch(err) {
       console.error(err.message);
     }
