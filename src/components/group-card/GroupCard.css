@@ -124,7 +124,7 @@
   z-index: 1000;
   position: absolute;
   top: 38px;
-  right: -68px;
+  right: -10px;
   background-color: #ffff;
   border-radius: 4px;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
@@ -191,5 +191,11 @@
 @media screen and (max-width: 500px) {
   .group-card {
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .toggleMoreVert {
+    right: 0px;
   }
 }
