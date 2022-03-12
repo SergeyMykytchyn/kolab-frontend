@@ -1,7 +1,7 @@
 .post-header {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 680px;
+  max-width: 680px;
   white-space: nowrap;
 }
 
@@ -55,4 +55,34 @@
   font-size: 18px;
   letter-spacing: 1px;
   margin-bottom: 18px;
+}
+
+@media screen and (max-width: 780px) {
+  .post-header {
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .post-header {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .post-header {
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .post-header {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .post-header {
+    max-width: 200px;
+  }
 }
