@@ -16,6 +16,6 @@ const deploy_frontend = "https://kolab-frontend.herokuapp.com";
 
 export const HOST = deploy_frontend;
 
-export const SERVER_HOST = deploy_backend;
+export const SERVER_HOST = localhost_backend;
 
-export const SERVER_HOST_API = deploy_backend_api;
+export const SERVER_HOST_API = localhost_backend_api;

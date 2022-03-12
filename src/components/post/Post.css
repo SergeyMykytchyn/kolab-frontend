@@ -1,3 +1,10 @@
+.post-header {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 680px;
+  white-space: nowrap;
+}
+
 .post-header-title {
   white-space: nowrap;
   width: 700px !important;

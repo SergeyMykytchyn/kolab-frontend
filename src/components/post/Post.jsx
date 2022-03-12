@@ -70,7 +70,7 @@ const Post = ({ post }) => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         > 
-          <div>
+          <div className="post-header">
             <span className="post-header-title">{post.caption}</span>
           </div>
         </AccordionSummary>
@@ -91,7 +91,7 @@ const Post = ({ post }) => {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>User</TableCell>
+                      <TableCell sx={{ minWidth: 120 }}>User</TableCell>
                       <TableCell>Message</TableCell>
                     </TableRow>
                   </TableHead>
