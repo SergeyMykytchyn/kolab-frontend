@@ -1,0 +1,413 @@
+.page {
+  width: 100%;
+}
+
+.pageTable {
+  background: #ffff;
+  border-collapse: collapse;
+  border-radius: 2px;
+  border-spacing: 0;
+  box-shadow: 0 1px 3px 0 #e9ebec, 0 0 0 1px #e9ebec;
+  line-height: 1;
+  max-width: 1136px;
+  width: 100%;
+}
+
+.pageTableCell {
+  line-height: 1.3;
+  min-height: 24px;
+  overflow: hidden;
+  padding: 12px 24px;
+  text-align: left;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+
+.pageTableCell:not(:first-child) {
+  padding-left: 0;
+}
+
+.pageTableCellContent {
+  display: flex;
+  align-items: center;
+}
+
+.pageTableCellButtonIcon {
+  width: 40px;
+  height: 40px;
+  border: none;
+  margin-right: 4px;
+}
+.pageTableCellButtonIcon:focus {
+  border: none;
+}
+
+.pageTableCellButtonIcon:hover {
+  background-color: transparent;
+}
+
+.pageTableCellButtonIcon:active {
+  background-color: transparent;
+}
+
+.pageTableHiddenCell {
+  line-height: 1.3;
+  min-height: 24px;
+  /* overflow: hidden; */
+  padding: 16px 24px 16px 48px;
+  text-align: left;
+  text-overflow: ellipsis;
+}
+
+.pageTableHiddenCellContent {
+  display: flex;
+  flex-direction: column;
+}
+.pageTableHiddenCellContent:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.pageTableHiddenCellContentLabel {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pageTableHiddenCellContentText {
+}
+
+.pageTableHeader {
+  border-bottom: 1px solid #e9ebec;
+}
+
+.pageTableHeaderCell {
+  color: #869ba2;
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.pageTableHeaderCellContent {
+  font-weight: 500;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  padding: 0;
+}
+
+.pageTableHeaderCellContentIcon {
+  color: #00678a;
+  height: 14px;
+}
+
+.pageTableHeaderCellContentIconDesc {
+  transform: rotate(180deg);
+}
+
+.pageTableHeaderCellContentIconHide {
+  display: none;
+}
+
+.pageTableHeaderCellContentIconDisable {
+  pointer-events: none;
+}
+
+.pageTableContentFake {
+  background-color: transparent;
+  height: 12px;
+}
+
+/* .row:not(:nth-last-child(2)) {
+  border-bottom: 1px solid #e9ebec;
+} */
+
+.pageTableHeaderCellContentDisable {
+  cursor: text;
+}
+
+@keyframes iconOpen {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes iconClose {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animationIconOpen {
+  animation-name: iconOpen;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.animationIconClose {
+  animation-name: iconClose;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.table {
+  background: #fff;
+  border-collapse: collapse;
+  border-radius: 2px;
+  border-spacing: 0;
+  box-shadow: 0 1px 3px 0 #e9ebec, 0 0 0 1px #e9ebec;
+  line-height: 1;
+  max-width: 1136px;
+}
+
+.tableContentFake {
+  background-color: transparent;
+  height: 12px;
+}
+
+.tableRow {
+  height: 48px;
+}
+
+.tableRow:hover {
+  background: #eff4f6;
+}
+
+.tableRow:first-child {
+  margin-top: 12px;
+}
+
+.tableCell {
+  line-height: 1.3;
+  min-height: 24px;
+  padding: 12px 24px;
+  text-align: left;
+}
+
+.tableCell:not(:first-child) {
+  padding-left: 0;
+}
+
+.tableCellFiller {
+  padding-bottom: 14px;
+  padding-top: 14px;
+}
+
+.tableHeader {
+  border-bottom: 1px solid #e9ebec;
+}
+
+.tableHeaderCell {
+  white-space: nowrap;
+}
+
+.tableHeaderCellContent {
+  background: transparent;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  padding: 0;
+}
+
+.tableHeaderCellContentText {
+  margin-right: 4px;
+}
+
+.tableHeaderCellContentIcon {
+  color: #00678a;
+  height: 14px;
+}
+
+.tableHeaderCellContentIconDesc {
+  transform: rotate(180deg);
+}
+
+.tableHeaderCellContentIconHide {
+  display: none;
+}
+
+.tableHeaderCellContentDisable {
+  pointer-events: none;
+}
+
+.tableHeaderCellIcon {
+  color: #00678a;
+  cursor: pointer;
+  height: 9px;
+  margin-left: 3px;
+  width: 6px;
+}
+
+.tableEmptyContent {
+  background: #fff;
+  border-collapse: collapse;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-spacing: 0;
+  box-shadow: 0 1px 3px 0 #e9ebec, 0 0 0 1px #e9ebec;
+  display: flex;
+  justify-content: center;
+  line-height: 1.5em;
+  margin-top: -24px;
+  padding: 30px 0;
+}
+
+.tableEmptyContent span {
+  line-height: 1.5em;
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 24% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 24% 0%;
+  }
+}
+
+.fillerWrapper {
+  animation: AnimationName 1s ease infinite;
+  background: linear-gradient(90deg, #eff4f6, #cddfe5, #eff4f6);
+  background-size: 200% 200%;
+
+  height: 20px;
+  width: 100%;
+}
+
+.button,
+.buttonLabel {
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  line-height: 1;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+.buttonIcon,
+.buttonLabelIcon {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.buttonIconItem,
+.buttonLabelIconItem {
+  color: #00678a;
+  height: 22px;
+  vertical-align: middle;
+  width: 22px;
+}
+
+.buttonIconItem:hover,
+.buttonLabelIconItem:hover {
+  background-color: #eff4f6;
+}
+
+.buttonIconItem:active,
+.buttonLabelIconItem:active {
+  background-color: #cddfe5;
+}
+
+.buttonIconItem:focus,
+.buttonLabelIconItem:focus {
+  border: 1px solid #00678a;
+}
+
+.buttonIconItem:disabled,
+.buttonLabelIconItem:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.buttonLabel {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.buttonLabel svg {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: #00678a;
+  margin-right: 4px;
+}
+
+.buttonLabel:hover > svg {
+  background-color: #eff4f6;
+}
+
+.buttonLabel:active > svg {
+  background-color: #cddfe5;
+}
+
+.buttonLabel:focus > svg {
+  border: 1px solid #00678a;
+}
+
+.buttonLabelText {
+  flex: 1;
+}
+
+.buttonLabelVertical {
+  display: inline-block;
+}
+
+.buttonLabelVertical svg {
+  margin-right: 0;
+}
+
+.buttonLabelDisabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.buttonLabelNone svg {
+  margin-right: 0;
+}
+
+.buttonIconLabel {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.buttonIconLabelText {
+  margin-left: 4px;
+}
+
+.buttonIconLabel:hover > button {
+  background-color: #eff4f6;
+}
+
+.buttonIconLabel:active > button {
+  background-color: #cddfe5;
+  border: 1px solid #00678a;
+}
+
+.buttonIconLabel:focus > button {
+  border: 1px solid #00678a;
+}
+
+.buttonIconLabelDisabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+}

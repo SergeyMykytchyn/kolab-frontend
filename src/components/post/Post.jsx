@@ -8,13 +8,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Api from "../../api/Api";
 import { PostsContext } from "../../context/PostsContext";
 import { GroupsContext } from "../../context/GroupsContext";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { ResponsiveTable } from "../responsive-table/index";
 
 const Post = ({ post }) => {
   const { updatePost } = useContext(PostsContext);
@@ -33,13 +27,7 @@ const Post = ({ post }) => {
           "Accept": "application/json"
         }
       };
-      let response;
-      // if (post.forms && post.forms.find(item => item.user.id === user.data.id)) {
-      //   response = await Api.put("/Form", {...payload, id: post.forms.find(item => item.user.id === user.data.id).id }, getConfig);
-      // } else {
-      //   response = await Api.post("/Form", payload, getConfig);
-      // }
-      response = await Api.post("/Form", payload, getConfig);
+      const response = await Api.post("/Form", payload, getConfig);
       const updatedPost = await Api.get(`/Post/${post.id}`, getConfig);
       updatePost(updatedPost.data);
       setMessageBody("");
@@ -57,6 +45,35 @@ const Post = ({ post }) => {
       });
     }
   }
+
+  const columns = [
+    {
+      accessor: "name",
+      label: "Name",
+      position: 1,
+      priorityLevel: 1,
+      minWidth: 180,
+      isVisible: true
+    },
+    {
+      accessor: "message",
+      label: "Message",
+      position: 2,
+      priorityLevel: 2,
+      minWidth: 300,
+      isVisible: true
+    }
+  ];
+
+  const rowsData = rows.map((row, index) => {
+    return {
+      id: index,
+      data: {
+        name: row.user,
+        message: row.content
+      }
+    };
+  });
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -87,28 +104,7 @@ const Post = ({ post }) => {
               <div className="post-discussion-title">
                 <span >Discussion:</span>
               </div>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell sx={{ minWidth: 120 }}>User</TableCell>
-                      <TableCell>Message</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <TableRow
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {row.user}
-                        </TableCell>
-                        <TableCell>{row.content}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <ResponsiveTable columns={columns} rows={rowsData} />
             </div> : null}
           <div className="post-send-message">
             <div className="post-send-message-title">
