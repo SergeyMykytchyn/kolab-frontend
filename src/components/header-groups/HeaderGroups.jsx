@@ -78,8 +78,10 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
         }
       };
       const newGroup = await Api.post("/Group/add-with-identificator", { identificator: joinId }, getConfig);
+      setJoinId("");
       addGroup(newGroup.data);
     } catch(err) {
+      setJoinId("");
       console.error(err.message);
     }
   };

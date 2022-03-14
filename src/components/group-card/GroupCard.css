@@ -1,9 +1,19 @@
 .group-card {
-  width: 300px;
-  min-height: 200px;
+  display: inline-block;
+  flex-direction: column;
 
+  border-radius: 8px;
+  background-color: #ffff;
+
+  overflow: visible;
+
+  position: relative;
+}
+
+.group-card-view {
   margin-left: 37px;
   margin-top: 37px;
+  width: 300px;
 
   display: inline-block;
   flex-direction: column;
@@ -73,6 +83,7 @@
 }
 
 .group-card-ContentName {
+  text-align: left;
   width: 170px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -82,7 +93,7 @@
   font-size: 20px;
   letter-spacing: 0.02em;
 
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .group-card-ContentNameInput {
@@ -90,10 +101,11 @@
 }
 
 .group-card-ContentDescriptionInput {
-  width: 250px;
+  width: 100%;
 }
 
 .group-card-ContentCreator {
+  text-align: left;
   width: 170px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -103,10 +115,11 @@
   font-size: 18px;
   letter-spacing: 0.02em;
 
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .group-card-ContentDescription {
+  text-align: left;
   width: 260px;
 
   text-overflow: ellipsis;
@@ -188,8 +201,19 @@
   height: 30px !important;
 }
 
+.group-card-link {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  width: 300px;
+  margin-left: 37px;
+  margin-top: 37px;
+}
+
 @media screen and (max-width: 500px) {
-  .group-card {
+  .group-card-link,
+  .group-card-view {
     margin-left: 0;
   }
 }

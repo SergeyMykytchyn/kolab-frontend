@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./GroupCard.css";
 import GeoPattern from "geopattern";
 import { MoreVert } from "@mui/icons-material";
@@ -31,6 +32,7 @@ const useOutsideAlerter = (ref, handleClose) => {
 };
 
 const GroupCard = ({ group }) => {
+  const history = useNavigate();
   const { removeGroup, createGroup, user } = useContext(GroupsContext);
   const [toggleMoreVert, setToggleMoreVert] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -176,66 +178,211 @@ const GroupCard = ({ group }) => {
   }, [group]);
 
   return (
-    <div className="group-card">
-      <div className="group-card-avatar">
-        <div className="group-card-avatarCircle" style={{ backgroundImage: group.creator.img ? `url('${SERVER_HOST}/${group.creator.img}')` : null }}>
-          { !group.creator.img || (group.creator.img && !imageExistsValue) ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
-        </div>
-      </div>
-      <div
-        className="group-card-Header"
-        style={{
-          backgroundImage: file ? `url(${imageCover})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
-        }}
-      >
-        { group.isCreating || isEditing ?
-          <>
-            <input id="cover-file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
-            <label className="cover-file-input-label" htmlFor="cover-file-input" >
+    <>
+      { group.isCreating || isEditing ? 
+        <div className="group-card-view">
+          <div className="group-card-avatar">
+            <div className="group-card-avatarCircle" style={{ backgroundImage: group.creator.img ? `url('${SERVER_HOST}/${group.creator.img}')` : null }}>
+              { !group.creator.img || (group.creator.img && !imageExistsValue) ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
+            </div>
+          </div>
+          <div
+            className="group-card-Header"
+            style={{
+              backgroundImage: file ? `url(${imageCover})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
+            }}
+          >
+            <input
+              id="cover-file-input"
+              type="file"
+              accept="image/*"
+              onChange={(event) => {
+                handleUploadClick(event);
+              }}
+              hidden
+            />
+            <label
+              className="cover-file-input-label"
+              htmlFor="cover-file-input"
+            >
               <AddAPhotoIcon
                 className="cover-add-photo-icon"
               />
             </label>
-          </>
-          : null}
-        { !toggleMoreVert ? <MoreVert className="moreVert" onClick={() => setToggleMoreVert(!toggleMoreVert)} /> : null }
-        { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
-        {toggleMoreVert ? <div ref={toggleMoreVertRef} className="toggleMoreVert">
-          {user.data.role === "teacher" && group.userId === user.data.id ? 
-            <button className="toggleMoreVertButton" onClick={() => { 
-              setIsEditing(group.isCreating ? false : !isEditing);
-              setToggleMoreVert(!toggleMoreVert);
-            }}>
-              Edit
-            </button> : null}
-          { group.userId !== user.data.id ? <button className="toggleMoreVertButton" onClick={() => handleLeave()}>Leave</button> : null }
-          { user.data.role === "teacher" && group.userId === user.data.id ? <button className="toggleMoreVertButton" onClick={() => handleDelete()}>Delete</button> : null}
-          <button className="toggleMoreVertButton" onClick={() => handleCopyId()}>Copy id</button>
+            { !toggleMoreVert ? 
+                <MoreVert
+                  className="moreVert"
+                  onClick={(event) => {
+                    setToggleMoreVert(!toggleMoreVert)
+                  }}
+                /> : null }
+            { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
+            {toggleMoreVert ?
+              <div ref={toggleMoreVertRef} className="toggleMoreVert">
+                {user.data.role === "teacher" && group.userId === user.data.id ? 
+                  <button
+                    className="toggleMoreVertButton"
+                    onClick={(event) => {
+                      setIsEditing(group.isCreating ? false : !isEditing);
+                      setToggleMoreVert(!toggleMoreVert);
+                    }}
+                  >
+                    Edit
+                  </button> : null}
+                { group.userId !== user.data.id ?
+                  <button
+                    className="toggleMoreVertButton"
+                    onClick={(event) => {
+                      handleLeave();
+                    }}
+                  >
+                    Leave
+                  </button> : null }
+                { user.data.role === "teacher" && group.userId === user.data.id ?
+                  <button
+                    className="toggleMoreVertButton"
+                    onClick={(event) => {
+                      handleDelete();
+                    }}
+                  >
+                    Delete
+                  </button> : null}
+                <button
+                  className="toggleMoreVertButton"
+                  onClick={(event) => {
+                    handleCopyId();
+                  }}
+                >
+                  Copy id
+                </button>
+              </div> : null }
+          </div>
+          <div className="group-card-Content">
+            
+            <div className="group-card-ContentName">
+              <input onChange={e => setName(e.target.value)} value={name} className="group-card-ContentNameInput" />
+            </div>
+            
+            <div className="group-card-ContentCreator">
+              <span>{group.creator.firstName + ' ' + group.creator.lastName}</span>
+            </div>
+
+            <div className="group-card-ContentDescription">
+              <input
+                onChange={event => {
+                  setDescription(event.target.value);
+                }}
+                value={description}
+                className="group-card-ContentDescriptionInput"
+              />
+            </div>
+
+            {isEditing ?
+              <button
+                className="group-card-ContentEdit"
+                onClick={(event) => {
+                  handleEdit();
+                }}
+              >
+                Save
+              </button> : null}
+            {group.isCreating ? 
+              <button
+                className="group-card-ContentEdit"
+                onClick={(event) => {
+                  handleCreate();
+                }}
+              >
+                Save
+              </button> : null}
+            
+          </div>
         </div> : null }
-      </div>
-      <div className="group-card-Content">
-        
-        <div className="group-card-ContentName">
-          {group.isCreating || isEditing ? 
-            <input onChange={e => setName(e.target.value)} value={name} className="group-card-ContentNameInput" /> : 
-            <a href={`/posts/${group.id}`}><span>{name}</span></a> }
-        </div>
-        
-        <div className="group-card-ContentCreator">
-          <span>{group.creator.firstName + ' ' + group.creator.lastName}</span>
-        </div>
+      { !group.isCreating && !isEditing ? 
+        <button className="group-card-link" onClick={() => history(`/posts/${group.id}`) } >
+          <div className="group-card">
+            <div className="group-card-avatar">
+              <div className="group-card-avatarCircle" style={{ backgroundImage: group.creator.img ? `url('${SERVER_HOST}/${group.creator.img}')` : null }}>
+                { !group.creator.img || (group.creator.img && !imageExistsValue) ? <img className="group-card-avatarCircleIcon" src="./assets/avatar.svg" alt="avatar" /> : null }
+              </div>
+            </div>
+            <div
+              className="group-card-Header"
+              style={{
+                backgroundImage: file ? `url(${imageCover})` : group.img && imageCoverExistsValue ? `url('${SERVER_HOST}/${group.img}')` : GeoPattern.generate(name).toDataUrl()
+              }}
+            >
+              { !toggleMoreVert ? 
+                  <MoreVert
+                    className="moreVert"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setToggleMoreVert(!toggleMoreVert)
+                    }}
+                  /> : null }
+              { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
+              {toggleMoreVert ?
+                <div ref={toggleMoreVertRef} className="toggleMoreVert">
+                  {user.data.role === "teacher" && group.userId === user.data.id ? 
+                    <button
+                      className="toggleMoreVertButton"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setIsEditing(group.isCreating ? false : !isEditing);
+                        setToggleMoreVert(!toggleMoreVert);
+                      }}
+                    >
+                      Edit
+                    </button> : null}
+                  { group.userId !== user.data.id ?
+                    <button
+                      className="toggleMoreVertButton"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleLeave();
+                      }}
+                    >
+                      Leave
+                    </button> : null }
+                  { user.data.role === "teacher" && group.userId === user.data.id ?
+                    <button
+                      className="toggleMoreVertButton"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleDelete();
+                      }}
+                    >
+                      Delete
+                    </button> : null}
+                  <button
+                    className="toggleMoreVertButton"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleCopyId();
+                    }}
+                  >
+                    Copy id
+                  </button>
+                </div> : null }
+            </div>
+            <div className="group-card-Content">
+              
+              <div className="group-card-ContentName">
+                <span>{name}</span>
+              </div>
+              
+              <div className="group-card-ContentCreator">
+                <span>{group.creator.firstName + ' ' + group.creator.lastName}</span>
+              </div>
 
-        <div className="group-card-ContentDescription">
-          {group.isCreating || isEditing ? 
-            <input onChange={e => setDescription(e.target.value)} value={description} className="group-cardContentDescriptionInput" /> : 
-            <span>{description}</span> }
-        </div>
-
-        {isEditing ? <button className="group-card-ContentEdit" onClick={() => handleEdit()}>Save</button> : null}
-        {group.isCreating ? <button className="group-card-ContentEdit" onClick={() => handleCreate()}>Save</button> : null}
-        
-      </div>
-    </div>
+              <div className="group-card-ContentDescription">
+                <span>{description}</span>
+              </div>
+              
+            </div>
+          </div>
+        </button> : null }
+    </>
   );
 };
 
