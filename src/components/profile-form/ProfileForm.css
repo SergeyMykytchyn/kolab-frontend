@@ -47,7 +47,7 @@
 }
 
 .add-photo-icon {
-  color: white;
+  fill: white !important;
   position: absolute;
   bottom: 22%;
   right: 38%;
