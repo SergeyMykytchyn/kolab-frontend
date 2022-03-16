@@ -26,7 +26,7 @@ const SignInForm = () => {
         localStorage.setItem("TOKEN", response.data.token);
         history("/groups");
       }).catch(err => {
-        setIsIncorrectData(err.response.data.message)
+        setIsIncorrectData(err.response.data.message);
       });
     } catch(err) {
       console.error(err);

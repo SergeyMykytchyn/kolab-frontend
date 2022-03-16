@@ -39,6 +39,7 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
   const [toggleJoin, setToggleJoin] = useState(false);
   const [joinId, setJoinId] = useState("");
   const [imageExistsValue, setImageExistsValue] = useState(false);
+  const [isIncorrectData, setIsIncorrectData] = useState(false);
 
   const toggleAddRef = useRef(null);
   useOutsideAlerter(toggleAddRef, () => setToggleAdd(false));
@@ -78,11 +79,15 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
           "Content-Type": "application/json"
         }
       };
-      const newGroup = await Api.post("/Group/add-with-identificator", { identificator: joinId }, getConfig);
-      setJoinId("");
-      addGroup(newGroup.data);
+      await Api.post("/Group/add-with-identificator", { identificator: joinId }, getConfig)
+      .then(response => {
+        setJoinId("");
+        addGroup(response.data);
+      }).catch(err => {
+        setJoinId("");
+        setIsIncorrectData(err.response.data.message);
+      });
     } catch(err) {
-      setJoinId("");
       console.error(err.message);
     }
   };
@@ -102,6 +107,17 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
 
   return (
     <>
+      {isIncorrectData ? <Dialog handleClose={() => setIsIncorrectData(false)}>
+        <div className="overlay-pane-title">
+          <span>Error</span>
+        </div>
+        <div className="overlay-pane-message">
+          <span>{isIncorrectData}</span>
+        </div>
+        <div className="overlay-pane-button-wrapper">
+          <button onClick={() => setIsIncorrectData(false)} className="overlay-pane-button">Ok</button>
+        </div>
+      </Dialog> : null }
       {toggleJoin ? 
         <Dialog handleClose={() => setToggleJoin(false)}>
           <div className="dialog-join-title">
