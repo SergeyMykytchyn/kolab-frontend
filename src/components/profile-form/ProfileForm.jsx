@@ -23,6 +23,7 @@ const ProfileForm = () => {
   const [imageExistsValue, setImageExistsValue] = useState(false);
 
   const [file, setFile] = useState(null);
+  const [fileURL, setFileURL] = useState(null);
 
   const [isShown, setIsShown] = useState(false);
 
@@ -89,9 +90,10 @@ const ProfileForm = () => {
 
   const handleUploadClick = (e) => {
     const file = e.target.files[0];
+    setFile(file);
     const binaryData = []
     binaryData.push(file);
-    setFile(window.URL.createObjectURL(new Blob(binaryData, {type: "image/*"})));
+    setFileURL(window.URL.createObjectURL(new Blob(binaryData, {type: "image/*"})));
   };
 
   return (
@@ -124,15 +126,15 @@ const ProfileForm = () => {
         <div className="profile-form">
           <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle"
             style={{
-              backgroundImage: file ? `url(${file})` : (user.img && imageExistsValue) ? `url('${SERVER_HOST}/${user.img}')` : null,
-              backgroundColor: file || (user.img && imageExistsValue) ? null : "#76b1a6"
+              backgroundImage: fileURL ? `url(${fileURL})` : (user.img && imageExistsValue) ? `url('${SERVER_HOST}/${user.img}')` : null,
+              backgroundColor: fileURL || (user.img && imageExistsValue) ? null : "#76b1a6"
             }}
           >
             <input id="avatar-file-input" type="file" accept="image/*" onChange={handleUploadClick} hidden/>
             {isShown ? <label className="file-input-label" htmlFor="avatar-file-input" >
               <AddAPhotoIcon className="add-photo-icon"/>
             </label> : null }
-            { (!user.img && !file) || (!imageExistsValue && !file) ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+            { (!user.img && !fileURL) || (!imageExistsValue && !fileURL) ? <img className="profile-avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
           </div>
 
           <TextField
