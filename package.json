@@ -27,12 +27,15 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
+    "cypress": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -46,5 +49,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
+    "cypress": "^9.5.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "start-server-and-test": "^1.14.0"
   }
 }

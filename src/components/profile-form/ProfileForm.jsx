@@ -137,6 +137,7 @@ const ProfileForm = () => {
           </div>
 
           <TextField
+            id="firstName"
             sx={{
               marginBottom: "16px"
             }}
@@ -148,6 +149,7 @@ const ProfileForm = () => {
           />
 
           <TextField
+            id="lastName"
             sx={{
               marginBottom: "16px"
             }}
@@ -159,6 +161,7 @@ const ProfileForm = () => {
           />
 
           <TextField
+            id="email"
             sx={{
               marginBottom: "16px"
             }}
@@ -170,6 +173,7 @@ const ProfileForm = () => {
           />
 
           <TextField
+            id="password"
             sx={{
               marginBottom: "16px"
             }}

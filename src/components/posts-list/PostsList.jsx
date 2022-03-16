@@ -82,10 +82,10 @@ const PostsList = () => {
             }}
           >
             <div className="add-new-task-details">
-              <TextField label="Task Title" variant="standard" fullWidth value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} />
+              <TextField id="title" label="Task Title" variant="standard" fullWidth value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} />
             </div>
             <div className="add-new-task-details">
-              <TextField label="Task Description" variant="filled" fullWidth  multiline minRows={4} value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} />
+              <TextField id="description" label="Task Description" variant="filled" fullWidth  multiline minRows={4} value={taskDescription} onChange={(e) => setTaskDescription(e.target.value)} />
             </div>
             <button className="add-new-task-button" onClick={addNewTask}>
               Add

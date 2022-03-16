@@ -85,7 +85,7 @@ const Post = ({ post }) => {
           }}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
-          id="panel1a-header"
+          id="post-panel1a-header"
         > 
           <div className="post-header">
             <span className="post-header-title">{post.caption}</span>
@@ -110,7 +110,7 @@ const Post = ({ post }) => {
             <div className="post-send-message-title">
               <span >Send a message:</span>
             </div>
-            <TextField label="Message Body" variant="filled" fullWidth  multiline minRows={4} value={messageBody} onChange={(e) => setMessageBody(e.target.value)} />
+            <TextField id="messageBody" label="Message Body" variant="filled" fullWidth  multiline minRows={4} value={messageBody} onChange={(e) => setMessageBody(e.target.value)} />
           </div>
           <button className="post-send-button" onClick={handleSend}>Send</button>
         </AccordionDetails>

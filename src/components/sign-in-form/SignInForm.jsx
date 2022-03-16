@@ -65,7 +65,7 @@ const SignInForm = () => {
               }}
               required
               error={!emailClicked || email ? false: true}
-              id="filled-error-helper-text-required"
+              id="email"
               label="Email"
               variant="filled"
               helperText="Email is required"
@@ -84,7 +84,7 @@ const SignInForm = () => {
               }}
               required
               error={!passwordClicked || password ? false: true}
-              id="filled-error-helper-text-required"
+              id="password"
               label="Password"
               variant="filled"
               helperText="Password is required"

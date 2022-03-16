@@ -219,7 +219,7 @@ const GroupCard = ({ group }) => {
             { toggleMoreVert ? <MoreVert className="moreVert" /> : null }
             {toggleMoreVert ?
               <div ref={toggleMoreVertRef} className="toggleMoreVert">
-                {user.data.role === "teacher" && group.userId === user.data.id ? 
+                {user.data?.role === "teacher" && group.userId === user.data?.id ? 
                   <button
                     className="toggleMoreVertButton"
                     onClick={(event) => {
@@ -229,7 +229,7 @@ const GroupCard = ({ group }) => {
                   >
                     Edit
                   </button> : null}
-                { group.userId !== user.data.id ?
+                { group.userId !== user.data?.id ?
                   <button
                     className="toggleMoreVertButton"
                     onClick={(event) => {
@@ -238,7 +238,7 @@ const GroupCard = ({ group }) => {
                   >
                     Leave
                   </button> : null }
-                { user.data.role === "teacher" && group.userId === user.data.id ?
+                { user.data?.role === "teacher" && group.userId === user.data?.id ?
                   <button
                     className="toggleMoreVertButton"
                     onClick={(event) => {
@@ -260,7 +260,7 @@ const GroupCard = ({ group }) => {
           <div className="group-card-Content">
             
             <div className="group-card-ContentName">
-              <input onChange={e => setName(e.target.value)} value={name} className="group-card-ContentNameInput" />
+              <input id="name" onChange={e => setName(e.target.value)} value={name} className="group-card-ContentNameInput" />
             </div>
             
             <div className="group-card-ContentCreator">
@@ -269,6 +269,7 @@ const GroupCard = ({ group }) => {
 
             <div className="group-card-ContentDescription">
               <input
+                id="description"
                 onChange={event => {
                   setDescription(event.target.value);
                 }}

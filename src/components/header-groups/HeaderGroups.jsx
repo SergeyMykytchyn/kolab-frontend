@@ -131,14 +131,14 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
             { displayAdd && toggleAdd ? <Add className="add" /> : null }
             { toggleAdd ? 
               <div ref={toggleAddRef} className="toggleAdd">
-                { user.data.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
+                { user?.data?.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
                 <button className="toggleAddButton" onClick={handleJoin}>Join the project</button>
               </div> : null }
             { !profile ? 
               <div className="avatar">
                 <a href="/profile">
-                  <div className="avatarCircle" style={{ backgroundImage: user.data && user.data.img ? `url('${SERVER_HOST}/${user.data.img}')` : null }}>
-                    { (user.data && !user.data.img) || (user.data && user.data.img && !imageExistsValue) ? <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
+                  <div className="avatarCircle" style={{ backgroundImage: user?.data && user.data?.img ? `url('${SERVER_HOST}/${user.data.img}')` : null }}>
+                    { (user?.data && !user.data?.img) || (user?.data && user.data?.img && !imageExistsValue) ? <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
                   </div>
                 </a>
               </div> : null}
