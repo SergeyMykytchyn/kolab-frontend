@@ -88,12 +88,11 @@ const ProfileForm = () => {
   };
 
   const handleUploadClick = (e) => {
-    setFile(e.target.files[0]);
+    const file = e.target.files[0];
+    const binaryData = []
+    binaryData.push(file);
+    setFile(window.URL.createObjectURL(new Blob(binaryData, {type: "image/*"})));
   };
-
-  const binaryData = []
-  binaryData.push(file);
-  const fileURL = new Blob(binaryData, {type: "image/*"}); 
 
   return (
     <>
@@ -125,7 +124,7 @@ const ProfileForm = () => {
         <div className="profile-form">
           <div onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)} className="profile-avatarCircle"
             style={{
-              backgroundImage: file ? `url(${window.URL.createObjectURL(fileURL)})` : (user.img && imageExistsValue) ? `url('${SERVER_HOST}/${user.img}')` : null,
+              backgroundImage: file ? `url(${file})` : (user.img && imageExistsValue) ? `url('${SERVER_HOST}/${user.img}')` : null,
               backgroundColor: file || (user.img && imageExistsValue) ? null : "#76b1a6"
             }}
           >
