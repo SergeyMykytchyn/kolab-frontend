@@ -32,7 +32,7 @@ const useOutsideAlerter = (ref, handleClose) => {
 };
 
 const HeaderGroups = ({ title, displayAdd, profile }) => {
-  const { addGroup, user } = useContext(GroupsContext);
+  const { addGroup, user, groupIsCreating, setGroupIsCreating } = useContext(GroupsContext);
   const history = useNavigate();
 
   const [toggleAdd, setToggleAdd] = useState(false);
@@ -59,6 +59,7 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
       isCreating: true,
       userId: user.data.id
     };
+    setGroupIsCreating(true);
     setToggleAdd(false);
     addGroup(newGroup);
   };
@@ -117,7 +118,8 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
           <div className="overlay-pane-button-wrapper">
             <button className="overlay-pane-button" onClick={() => handleJoinSubmit()}>Join</button>
           </div>
-        </Dialog> : null }
+        </Dialog>
+      : null }
       <div className="header">
         <div className="headerContent">
 
@@ -131,9 +133,14 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
             { displayAdd && toggleAdd ? <Add className="add" /> : null }
             { toggleAdd ? 
               <div ref={toggleAddRef} className="toggleAdd">
-                { user?.data?.role === "teacher" ? <button className="toggleAddButton" onClick={handleCreate}>Create a project</button> : null }
+                { user?.data?.role === "teacher" ?
+                  <button disabled={groupIsCreating} className="toggleAddButton" onClick={handleCreate}>
+                    Create a project
+                  </button> 
+                : null }
                 <button className="toggleAddButton" onClick={handleJoin}>Join the project</button>
-              </div> : null }
+              </div> 
+            : null }
             { !profile ? 
               <div className="avatar">
                 <a href="/profile">
@@ -141,7 +148,8 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
                     { (user?.data && !user.data?.img) || (user?.data && user.data?.img && !imageExistsValue) ? <img className="avatarIcon" src={`${HOST}/assets/avatar.svg`} alt="avatar" /> : null }
                   </div>
                 </a>
-              </div> : null}
+              </div>
+            : null}
             <Logout className="logout" onClick={() => logout()} />
           </div>
 

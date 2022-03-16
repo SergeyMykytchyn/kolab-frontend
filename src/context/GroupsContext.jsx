@@ -5,6 +5,7 @@ export const GroupsContext = createContext();
 export const GroupsContextProvider = (props) => {
   const [user, setUser] = useState({});
   const [groups, setGroups] = useState([]);
+  const [groupIsCreating, setGroupIsCreating] = useState(false);
 
   const addGroup = (group) => {
     setGroups([...groups, group].sort((a, b) => a.id - b.id));
@@ -20,7 +21,18 @@ export const GroupsContextProvider = (props) => {
   };
 
   return (
-    <GroupsContext.Provider value={{ groups, setGroups, addGroup, removeGroup, createGroup, user, setUser }}>
+    <GroupsContext.Provider
+      value={{
+        groups,
+        setGroups,
+        addGroup,
+        removeGroup,
+        createGroup,
+        user,
+        setUser,
+        groupIsCreating,
+        setGroupIsCreating
+      }}>
       { props.children }
     </GroupsContext.Provider>
   );

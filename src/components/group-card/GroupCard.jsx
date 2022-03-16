@@ -33,7 +33,7 @@ const useOutsideAlerter = (ref, handleClose) => {
 
 const GroupCard = ({ group }) => {
   const history = useNavigate();
-  const { removeGroup, createGroup, user } = useContext(GroupsContext);
+  const { removeGroup, createGroup, user, setGroupIsCreating } = useContext(GroupsContext);
   const [toggleMoreVert, setToggleMoreVert] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(group.name);
@@ -62,7 +62,7 @@ const GroupCard = ({ group }) => {
       formData.append("description", description);
       formData.append("id", group.id);
       formData.append("img", file);
-      const response = await Api.put("/Group", formData, getConfig);
+      await Api.put("/Group", formData, getConfig);
       setIsEditing(false);
     } catch(err) {
       console.error(err.message);
@@ -71,10 +71,6 @@ const GroupCard = ({ group }) => {
 
   const handleCreate = async () => {
     try {
-      // const payload = {
-      //   name,
-      //   description,
-      // };
       const getConfig = {
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
@@ -93,6 +89,7 @@ const GroupCard = ({ group }) => {
         }
       };
       createGroup(newGroup, group);
+      setGroupIsCreating(false);
     } catch(err) {
       console.error(err.message);
     }
@@ -106,7 +103,7 @@ const GroupCard = ({ group }) => {
           "Accept": "application/json"
         }
       };
-      const response = await Api.post(`/User/leave-group?groupId=${group.id}`, {}, getConfig);
+      await Api.post(`/User/leave-group?groupId=${group.id}`, {}, getConfig);
       removeGroup(group);
     } catch(err) {
       console.error(err.message);
@@ -122,9 +119,10 @@ const GroupCard = ({ group }) => {
         }
       };
       if (group.id !== Infinity) {
-        const response = await Api.delete(`/Group/${group.id}`, getConfig);
+        await Api.delete(`/Group/${group.id}`, getConfig);
       }
       removeGroup(group);
+      setGroupIsCreating(false);
     } catch(err) {
       console.error(err.message);
     }
