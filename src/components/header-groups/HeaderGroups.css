@@ -146,7 +146,7 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 376px) {
   .headerContentStartTitle {
     margin-left: 8px;
   }
@@ -157,7 +157,7 @@
   }
 
   .headerContentStartTitle {
-    margin-left: 4px;
+    margin-left: 6px;
   }
 }
 

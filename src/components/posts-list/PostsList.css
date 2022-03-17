@@ -36,3 +36,7 @@
   letter-spacing: 1.25px;
   cursor: pointer;
 }
+
+.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded {
+  min-height: 80px;
+}
