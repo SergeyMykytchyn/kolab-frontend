@@ -3,10 +3,12 @@ import HeaderGroups from "../../components/header-groups/HeaderGroups";
 import GroupsGrid from "../../components/groups-grid/GroupsGrid";
 import Api from "../../api/Api";
 import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 // import { getConfig } from "../../constants";
 
 const GroupsPage = () => {
-  const { setGroups, setUser } = useContext(GroupsContext);
+  const { setGroups } = useContext(GroupsContext);
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -6,6 +6,7 @@ import { MoreVert } from "@mui/icons-material";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import Api from "../../api/Api";
 import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 import { SERVER_HOST } from "../../constants/index";
 import { imageExists } from "../../utils/index";
 // import { getConfig } from "../../constants";
@@ -33,7 +34,8 @@ const useOutsideAlerter = (ref, handleClose) => {
 
 const GroupCard = ({ group }) => {
   const history = useNavigate();
-  const { removeGroup, createGroup, user, setGroupIsCreating } = useContext(GroupsContext);
+  const { removeGroup, createGroup, setGroupIsCreating } = useContext(GroupsContext);
+  const { user } = useContext(UserContext);
   const [toggleMoreVert, setToggleMoreVert] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(group.name);

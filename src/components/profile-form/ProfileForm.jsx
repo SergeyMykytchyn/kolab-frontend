@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import "./ProfileForm.css";
 import TextField from "@mui/material/TextField";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 import Api from "../../api/Api";
 import { SERVER_HOST } from "../../constants/index";
 import { HOST } from "../../constants/index";
@@ -10,7 +10,7 @@ import Dialog from "../dialog/Dialog";
 import { imageExists } from "../../utils/index";
 
 const ProfileForm = () => {
-  const { user, setUser } = useContext(GroupsContext);
+  const { user, setUser } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

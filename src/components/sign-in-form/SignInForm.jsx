@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import "./SignInForm.css";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 import Api from "../../api/Api";
 import Dialog from "../dialog/Dialog";
 
 const SignInForm = () => {
-  const history = useNavigate();
-
   const [email, setEmail] = useState("");
   const [emailClicked, setEmailClicked] = useState(false);
 
@@ -15,6 +13,8 @@ const SignInForm = () => {
   const [passwordClicked, setPasswordClicked] = useState(false);
 
   const [isIncorrectData, setIsIncorrectData] = useState(false);
+
+  const { setToken } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const SignInForm = () => {
         password
       }).then(response => {
         localStorage.setItem("TOKEN", response.data.token);
-        history("/groups");
+        setToken(response.data.token);
       }).catch(err => {
         setIsIncorrectData(err.response.data.message);
       });
@@ -32,12 +32,6 @@ const SignInForm = () => {
       console.error(err);
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("TOKEN") != null) {
-      history("/groups");
-    }
-  }, []);
   
   return (
     <>

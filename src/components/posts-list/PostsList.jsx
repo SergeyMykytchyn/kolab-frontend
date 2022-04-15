@@ -9,13 +9,13 @@ import { Add } from "@mui/icons-material";
 import Api from "../../api/Api";
 import Post from "../post/Post";
 import { PostsContext } from "../../context/PostsContext";
-import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 import Dialog from "../dialog/Dialog";
 
 const PostsList = () => {
   const { groupId } = useParams();
   const { posts, addNewPost } = useContext(PostsContext);
-  const { user, setUser } = useContext(GroupsContext);
+  const { user, setUser } = useContext(UserContext);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 

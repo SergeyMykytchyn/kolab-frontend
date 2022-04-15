@@ -7,13 +7,11 @@ import TextField from "@mui/material/TextField";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Api from "../../api/Api";
 import { PostsContext } from "../../context/PostsContext";
-import { GroupsContext } from "../../context/GroupsContext";
 import { ResponsiveTable } from "../responsive-table/index";
 import Dialog from "../dialog/Dialog";
 
 const Post = ({ post }) => {
   const { updatePost } = useContext(PostsContext);
-  const { user } = useContext(GroupsContext);
   const [messageBody, setMessageBody] = useState("");
 
   const [isIncorrectData, setIsIncorrectData] = useState(false);

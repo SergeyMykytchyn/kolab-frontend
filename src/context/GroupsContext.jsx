@@ -3,7 +3,6 @@ import React, { useState, createContext } from "react";
 export const GroupsContext = createContext();
 
 export const GroupsContextProvider = (props) => {
-  const [user, setUser] = useState({});
   const [groups, setGroups] = useState([]);
   const [groupIsCreating, setGroupIsCreating] = useState(false);
 
@@ -28,8 +27,6 @@ export const GroupsContextProvider = (props) => {
         addGroup,
         removeGroup,
         createGroup,
-        user,
-        setUser,
         groupIsCreating,
         setGroupIsCreating
       }}>

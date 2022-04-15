@@ -2,8 +2,8 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import "./HeaderGroups.css";
 import { Logout, Add } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
-import { GroupsContext } from "../../context/GroupsContext"
+import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 import Dialog from "../dialog/Dialog";
 import Api from "../../api/Api";
 import { HOST } from "../../constants/index";
@@ -32,8 +32,8 @@ const useOutsideAlerter = (ref, handleClose) => {
 };
 
 const HeaderGroups = ({ title, displayAdd, profile }) => {
-  const { addGroup, user, groupIsCreating, setGroupIsCreating } = useContext(GroupsContext);
-  const history = useNavigate();
+  const { addGroup, groupIsCreating, setGroupIsCreating } = useContext(GroupsContext);
+  const { user, setToken } = useContext(UserContext);
 
   const [toggleAdd, setToggleAdd] = useState(false);
   const [toggleJoin, setToggleJoin] = useState(false);
@@ -46,7 +46,7 @@ const HeaderGroups = ({ title, displayAdd, profile }) => {
 
   const logout = () => {
     localStorage.removeItem("TOKEN");
-    history("/");
+    setToken(null);
   };
 
   const handleCreate = () => {

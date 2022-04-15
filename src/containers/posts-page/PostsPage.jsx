@@ -4,12 +4,12 @@ import HeaderGroups from "../../components/header-groups/HeaderGroups";
 import PostsList from "../../components/posts-list/PostsList";
 import Api from "../../api/Api";
 import { PostsContext } from "../../context/PostsContext";
-import { GroupsContext } from "../../context/GroupsContext";
+import { UserContext } from "../../context/UserContext";
 
 const PostsPage = () => {
   const { groupId } = useParams();
   const { setPosts } = useContext(PostsContext);
-  const { setUser } = useContext(GroupsContext);
+  const { setUser } = useContext(UserContext);
   const [group, setGroup] = useState({});
 
   useEffect(() => {
